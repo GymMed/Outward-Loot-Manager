@@ -44,6 +44,16 @@ namespace OutwardLootManager.Drop.Serialization
         [XmlElement("ItemDropRate")]
         public ItemDropRateSerializable ItemDropRate { get; set; }
 
+        [XmlArray("ExceptIds")]
+        [XmlArrayItem("ExceptId")]
+        [DefaultValue(null)]
+        public List<string> ExceptIds { get; set; } = null;
+
+        [XmlArray("ExceptNames")]
+        [XmlArrayItem("ExceptName")]
+        [DefaultValue(null)]
+        public List<string> ExceptNames { get; set; } = null;
+
         [XmlElement("IsForBosses")]
         [DefaultValue(false)]
         public bool IsBoss { get; set; } = false;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OutwardLootManager.Utility.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,199 +53,59 @@ namespace OutwardLootManager.Utility.Enums
 
     public static class UniqueEnemiesHelper
     {
-        // wiki names
-        public static readonly Dictionary<UniqueEnemies, string> Names = new()
+        public static readonly Dictionary<UniqueEnemies, EnemyIdentificationGroupData> Enemies = new()
         {
-            { UniqueEnemies.Accursed_Wendigo, "Accursed Wendigo" },
-            { UniqueEnemies.Altered_Gargoyle, "Altered Gargoyle" },
-            { UniqueEnemies.Ancestral_General, "Ancestral General" },
-            { UniqueEnemies.Ancestral_Soldier, "Ancestral Soldier" },
-            { UniqueEnemies.Bloody_Alexis, "Bloody Alexis" },
-            { UniqueEnemies.Calygrey_Hero, "Calygrey Hero" },
-            { UniqueEnemies.Chromatic_Arcane_Elemental, "Chromatic Arcane Elemental" },
-            { UniqueEnemies.Cracked_Gargoyle, "Cracked Gargoyle" },
-            { UniqueEnemies.Elemental_Parasite, "Elemental Parasite" },
-            { UniqueEnemies.Executioner_Bug, "Executioner Bug" },
-            { UniqueEnemies.Ghost_of_Vanasse, "Ghost of Vanasse" },
-            { UniqueEnemies.Giant_Horror, "Giant Horror" },
-            { UniqueEnemies.Glacial_Tuanosaur, "Glacial Tuanosaur" }, //TuanosaurIce" },
-            { UniqueEnemies.Golden_Matriarch, "Golden Matriarch" },
-            { UniqueEnemies.Grandmother_Medyse, "Grandmother Medyse" },
-            { UniqueEnemies.Greater_Grotesque, "Greater Grotesque" },
-            { UniqueEnemies.Guardian_of_the_Compass, "Guardian of the Compass" },
-            { UniqueEnemies.Kazite_Admiral, "Kazite Admiral" },
-            { UniqueEnemies.Lightning_Dancer, "Lightning Dancer" },
-            { UniqueEnemies.Liquid_Cooled_Golem, "Liquid-Cooled Golem" },
-            { UniqueEnemies.Luke_the_Pearlescent, "Luke the Pearlescent" },
-            { UniqueEnemies.Mad_Captains_Bones, "Mad Captain's Bones" },
-            { UniqueEnemies.Matriarch_Myrmitaur, "Matriarch Myrmitaur" },
-            { UniqueEnemies.Quartz_Elemental, "Quartz Elemental" },
-            { UniqueEnemies.Razorhorn_Stekosaur, "Razorhorn Stekosaur" },
-            { UniqueEnemies.Royal_Manticore, "Royal Manticore" },
-            { UniqueEnemies.Rusted_Enforcer, "Rusted Enforcer" },
-            { UniqueEnemies.Sandrose_Horror, "Sandrose Horror" },
-            { UniqueEnemies.She_Who_Speaks, "She Who Speaks" },
-            { UniqueEnemies.That_Annoying_Troglodyte, "That Annoying Troglodyte" },
-            { UniqueEnemies.The_Crusher, "The Crusher" },
-            { UniqueEnemies.The_First_Cannibal, "The First Cannibal" },
-            { UniqueEnemies.The_Last_Acolyte, "The Last Acolyte" },
-            { UniqueEnemies.Thunderbolt_Golem, "Thunderbolt Golem" },
-            { UniqueEnemies.Titanic_Guardian_Mk_7, "Titanic Guardian Mk-7 Golem" },
-            { UniqueEnemies.Troglodyte_Archmage, "Troglodyte Archmage" },
-            { UniqueEnemies.Tyrant_of_the_Hive, "Tyrant of the Hive" },
-            { UniqueEnemies.Vile_Illuminator, "Vile Illuminator" },
-            { UniqueEnemies.Virulent_Hiveman, "Virulent Hiveman" },
-            { UniqueEnemies.Volcanic_Gastrocin, "Volcanic Gastrocin" },
-        };
+            { UniqueEnemies.Accursed_Wendigo, new("Accursed Wendigo", "WendigoAccursed", "Unique_DefEd_Wendigo", "ElxncPIfuEuWkexSKkqFXg", "Corrupted Tombs", "Corrupted Tombs") },
+            { UniqueEnemies.Altered_Gargoyle, new("Altered Gargoyle", "GargoyleAltered", "Unique_DefEd_AlteredGargoyle", "dhQVMNRU5kCIWsWRFYpDdw", "Ziggurat Passage", "Ziggurat Passage") },
+            { UniqueEnemies.Ancestral_General, new("Ancestral General", "SkeletonBig (1)", "Unique_DefEd_AncestorBig", "XVuyIaCAVkatv89kId9Uqw", "Necropolis", "Necropolis") },
+            { UniqueEnemies.Ancestral_Soldier, new("Ancestral Soldier", "SkeletonSmall (1)", "Unique_DefEd_AncestorSmall", "IwZYxBIQZkaXXMWT9HC5nA", "Necropolis", "Necropolis") },
+            { UniqueEnemies.Bloody_Alexis, new("Bloody Alexis", "HumanArmoredThug", "Unique_DefEd_ArmoredThug", "VfYPPb4wcESdDVSiEq4UhA", "Undercity Passage", "Undercity Passage") },
+            { UniqueEnemies.Calygrey_Hero, new("Calygrey Hero", "LionmanElite (1)", "Elite_Calygrey", "pMfhK69Stky7MvE9Ro0XMQ", "Steam Bath Tunnels", "Steam Bath Tunnels") },
+            { UniqueEnemies.Chromatic_Arcane_Elemental, new("Chromatic Arcane Elemental", "ElementalChromatic", "Unique_DefEd_ChromaElemental", "RM13rq4JTEqbuANnncMCKA", "Compromised Mana Transfer Station", "Compromised Mana Transfer Station") },
+            { UniqueEnemies.Cracked_Gargoyle, new("Cracked Gargoyle", "GargoyleCracked", "Unique_DefEd_CrackedGargoyle", "-McLNdZsNEa3itw-ny7YBw", "Ark of the Exiled", "Ark of the Exiled") },
+            { UniqueEnemies.Elemental_Parasite, new("Crescent Shark", "ElementalParasite", "Wildlife_CrescentShark", "YDPy9S-An0-qGuvrJAM8yA", "Crumbling Loading Docks", "Crumbling Loading Docks") },
+            { UniqueEnemies.Executioner_Bug, new("Executioner Bug", "ExecutionerBug", "Unique_DefEd_ExecutionerBug", "MWplmyrxokSXELL63oWcAg", "The Slide", "The Slide") },
 
-        // useless
-        public static readonly Dictionary<UniqueEnemies, string> NamesLoc = new()
-        {
-            { UniqueEnemies.Accursed_Wendigo, "Unique_DefEd_Wendigo" },
-            { UniqueEnemies.Altered_Gargoyle, "Unique_DefEd_AlteredGargoyle" },
-            { UniqueEnemies.Ancestral_General, "Unique_DefEd_AncestorBig" },
-            { UniqueEnemies.Ancestral_Soldier, "Unique_DefEd_AncestorSmall" },
-            { UniqueEnemies.Bloody_Alexis, "Unique_DefEd_ArmoredThug" },
-            { UniqueEnemies.Calygrey_Hero, "Elite_Calygrey" },
-            { UniqueEnemies.Chromatic_Arcane_Elemental, "Unique_DefEd_ChromaElemental" },
-            { UniqueEnemies.Cracked_Gargoyle, "Unique_DefEd_CrackedGargoyle" },
-            { UniqueEnemies.Elemental_Parasite, "Wildlife_CrescentShark" },// crazy name...
-            { UniqueEnemies.Executioner_Bug, "Unique_DefEd_ExecutionerBug" },
-            { UniqueEnemies.Ghost_of_Vanasse, "Undead_GhostVanasse" },
-            { UniqueEnemies.Giant_Horror, "Giant_Horror" },
-            { UniqueEnemies.Glacial_Tuanosaur, "Unique_DefEd_GlacialTuano" },//TuanosaurIce" },
-            { UniqueEnemies.Golden_Matriarch, "Unique_DefEd_GoldenMatriarch" },
-            { UniqueEnemies.Grandmother_Medyse, "Unique_DefEd_GrandmotherMedyse" },
-            { UniqueEnemies.Greater_Grotesque, "Unique_DefEd_GreaterGrotestue" },
-            { UniqueEnemies.Guardian_of_the_Compass, "Golem_Basic2" },
-            { UniqueEnemies.Kazite_Admiral, "Unique_DefEd_KaziteCaptain" },
-            { UniqueEnemies.Lightning_Dancer, "Unique_DefEd_LightningDancer" },
-            { UniqueEnemies.Liquid_Cooled_Golem, "Unique_DefEd_LiquidGolem" },
-            { UniqueEnemies.Luke_the_Pearlescent, "Bandit_Standard_Captain2" },
-            { UniqueEnemies.Mad_Captains_Bones, "Undead_Skeleton2" },
-            { UniqueEnemies.Matriarch_Myrmitaur, "Elite_Myrm" },
-            { UniqueEnemies.Quartz_Elemental, "Unique_DefEd_QuartzElemental" },
-            { UniqueEnemies.Razorhorn_Stekosaur, "Unique_DefEd_BlackSteko" },
-            { UniqueEnemies.Royal_Manticore, "Wildlife_Manticore2" },
-            { UniqueEnemies.Rusted_Enforcer, "Unique_DefEd_RustyGolem" },
-            { UniqueEnemies.Sandrose_Horror, "Unique_DefEd_SandroseHorror" },
-            { UniqueEnemies.She_Who_Speaks, "Unique_DefEd_BossDweller" },
-            { UniqueEnemies.That_Annoying_Troglodyte, "Unique_DefEd_AnnoyingTrog" },
-            { UniqueEnemies.The_Crusher, "Unique_DefEd_DesertCrusher" },
-            { UniqueEnemies.The_First_Cannibal, "Wildlife_Wendigo2" },
-            { UniqueEnemies.The_Last_Acolyte, "Unique_DefEd_LastAcolyte" },
-            { UniqueEnemies.Thunderbolt_Golem, "Unique_DefEd_ProtypeForgeGolem" },
-            { UniqueEnemies.Titanic_Guardian_Mk_7, "Boss_DepracatedTitanticGolem" },
-            { UniqueEnemies.Troglodyte_Archmage, "Unique_DefEd_TrogMage" },
-            { UniqueEnemies.Tyrant_of_the_Hive, "Undead_Hivelord2" },
-            { UniqueEnemies.Vile_Illuminator, "Unique_DefEd_VileIlluminator" },
-            { UniqueEnemies.Virulent_Hiveman, "Unique_DefEd_VirulentHiveman" },
-            { UniqueEnemies.Volcanic_Gastrocin, "Unique_DefEd_VolcanicSlug" },
-        };
+            { UniqueEnemies.Ghost_of_Vanasse, new("Ghost of Vanasse", "GhostOfVanasse", "Undead_GhostVanasse", "R5UngwGS5EGWCH13toZO8Q", "Chersonese", "Chersonese") },
+            { UniqueEnemies.Giant_Horror, new("Giant_Horror", "GiantHorror", "Giant_Horror", "SntMM-EzuE-ptgmqp4qkYQ", "Crumbling Loading Docks", "Crumbling Loading Docks") },
+            { UniqueEnemies.Glacial_Tuanosaur, new("Glacial Tuanosaur", "TuanosaurIce", "Unique_DefEd_GlacialTuano", "1IKBT9DYc0yIkESwKtU40g", "Conflux Chambers", "Conflux Chambers") },
 
-        //gotten through Area.GetName()
-        public static readonly Dictionary<UniqueEnemies, string> WikiLocations = new()
-        {
-            { UniqueEnemies.Accursed_Wendigo , "Corrupted Tombs" },
-            { UniqueEnemies.Altered_Gargoyle , "Ziggurat Passage" },
-            { UniqueEnemies.Ancestral_General , "Necropolis" },
-            { UniqueEnemies.Ancestral_Soldier , "Necropolis" },
-            { UniqueEnemies.Bloody_Alexis , "Undercity Passage" },
-            { UniqueEnemies.Calygrey_Hero , "Steam Bath Tunnels" },
-            { UniqueEnemies.Chromatic_Arcane_Elemental , "Compromised Mana Transfer Station" },
-            { UniqueEnemies.Cracked_Gargoyle , "Ark of the Exiled" },
-            { UniqueEnemies.Elemental_Parasite , "Crumbling Loading Docks" },
-            { UniqueEnemies.Executioner_Bug , "The Slide" },
-            { UniqueEnemies.Ghost_of_Vanasse , "Chersonese" },
-            { UniqueEnemies.Giant_Horror , "Crumbling Loading Docks" },
-            { UniqueEnemies.Glacial_Tuanosaur , "Conflux Chambers" },
-            { UniqueEnemies.Golden_Matriarch , "Voltaic Hatchery" },
-            { UniqueEnemies.Grandmother_Medyse , "Sulphuric Caverns" },
-            { UniqueEnemies.Greater_Grotesque , "Lost Golem Manufacturing Facility" },
-            { UniqueEnemies.Guardian_of_the_Compass , "The Walled Garden" },
-            { UniqueEnemies.Kazite_Admiral , "Abandoned Living Quarters" },
-            { UniqueEnemies.Lightning_Dancer , "Ancient Foundry" },
-            { UniqueEnemies.Liquid_Cooled_Golem , "Destroyed Test Chambers" },
-            { UniqueEnemies.Luke_the_Pearlescent , "Ruins of Old Levant" },
-            { UniqueEnemies.Mad_Captains_Bones , "Pirates' Hideout" },
-            { UniqueEnemies.Matriarch_Myrmitaur , "Myrmitaur’s Haven" },
-            { UniqueEnemies.Quartz_Elemental , "The Grotto of Chalcedony" },
-            { UniqueEnemies.Razorhorn_Stekosaur , "Reptilian Lair" },
-            { UniqueEnemies.Royal_Manticore , "Enmerkar Forest" },
-            { UniqueEnemies.Rusted_Enforcer , "Ghost Pass" },
-            { UniqueEnemies.Sandrose_Horror , "Sand Rose Cave" },
-            { UniqueEnemies.She_Who_Speaks , "The Vault of Stone" },
-            { UniqueEnemies.That_Annoying_Troglodyte , "Jade Quarry" },
-            { UniqueEnemies.The_Crusher , "Ancestor’s Resting Place" },
-            { UniqueEnemies.The_First_Cannibal , "Face of the Ancients" },
-            { UniqueEnemies.The_Last_Acolyte , "Stone Titan Caves" },
-            { UniqueEnemies.Thunderbolt_Golem , "Electric Lab" },
-            { UniqueEnemies.Titanic_Guardian_Mk_7 , "Ruined Warehouse" },
-            { UniqueEnemies.Troglodyte_Archmage , "Blister Burrow" },
-            { UniqueEnemies.Tyrant_of_the_Hive , "Forest Hives" },
-            { UniqueEnemies.Vile_Illuminator , "Cabal of Wind Temple" },
-            { UniqueEnemies.Virulent_Hiveman , "Ancient Hive" },
-            { UniqueEnemies.Volcanic_Gastrocin , "The Eldest Brother" },
-        };
+            { UniqueEnemies.Golden_Matriarch, new("Golden Matriarch", "SpecterMeleeMatriarch", "Unique_DefEd_GoldenMatriarch", "GI-aE4Ry7UOIyAYYk7emFg", "Voltaic Hatchery", "Voltaic Hatchery") },
+            { UniqueEnemies.Grandmother_Medyse, new("Grandmother Medyse", "JellyFishMother", "Unique_DefEd_GrandmotherMedyse", "kp9R4kaoG02YfLdS9ROM4w", "Sulphuric Caverns", "Sulphuric Caverns") },
+            { UniqueEnemies.Greater_Grotesque, new("Greater Grotesque", "ImmaculateHorrorGreater", "Unique_DefEd_GreaterGrotestue", "JmeufMpL_E6eYnqCYP2r3w", "Lost Golem Manufacturing Facility", "Lost Golem Manufacturing Facility") },
+            { UniqueEnemies.Guardian_of_the_Compass, new("Guardian of the Compass", "GolemBoss", "Golem_Basic2", "BINT--E9xUaCgp4onBM54g", "The Walled Garden", "Abrassar") },
+            { UniqueEnemies.Kazite_Admiral, new("Kazite Admiral", "HumanKaziteCaptain", "Unique_DefEd_KaziteCaptain", "XVuyIaCAVkatv89kId9Uqw", "Abandoned Living Quarters", "Abandoned Living Quarters") },
+            { UniqueEnemies.Lightning_Dancer, new("Lightning Dancer", "BladeDancerLight", "Unique_DefEd_LightningDancer", "QRzc3AYY10CWyXOMgrIQTg", "Ancient Foundry", "Ancient Foundry") },
+            { UniqueEnemies.Liquid_Cooled_Golem, new("Liquid-Cooled Golem", "GolemShieldedIce", "Unique_DefEd_LiquidGolem", "8ztut4_yiEmK0-NFLa-XNQ", "Destroyed Test Chambers", "Destroyed Test Chambers") },
+            { UniqueEnemies.Luke_the_Pearlescent, new("Luke the Pearlescent", "NewBanditEquip_WhiteScavengerCaptainBoss_A (1)", "Bandit_Standard_Captain2", "XVuyIaCAVkatv89kId9Uqw", "Ruins of Old Levant", "Abrassar") },
+            { UniqueEnemies.Mad_Captains_Bones, new("Mad Captain’s Bones", "SkeletFighter", "Undead_Skeleton2", "JM_HjGXMlkq7a1Yb6gijgQ", "Pirates' Hideout", "Chersonese Misc. Dungeons") },
+            { UniqueEnemies.Matriarch_Myrmitaur, new("Matriarch Myrmitaur", "MyrmElite (1)", "Elite_Myrm", "6sB4_5lOJU2bWuMHnOL4Ww", "Myrmitaur’s Haven", "Myrmitaur’s Haven") },
+            { UniqueEnemies.Quartz_Elemental, new("Quartz Elemental", "ObsidianElementalQuartz", "Unique_DefEd_QuartzElemental", "LhhpSt8BO0aRN5mbeSuDrw", "The Grotto of Chalcedony", "The Grotto of Chalcedony") },
+            { UniqueEnemies.Razorhorn_Stekosaur, new("Razorhorn Stekosaur", "SteakosaurBlack (1)", "Unique_DefEd_BlackSteko", "03dSXwJMRUuzGu8s3faATQ", "Reptilian Lair", "Reptilian Lair") },
+            { UniqueEnemies.Royal_Manticore, new("The Royal Manticore", "RoyalManticore", "Wildlife_Manticore2", "RM13rq4JTEqbuANnncMCKA", "Enmerkar Forest", "Enmerkar Forest") },
 
-        public static readonly Dictionary<UniqueEnemies, string> GameLocations = new()
-        {
-            { UniqueEnemies.Accursed_Wendigo , "Corrupted Tombs" },
-            { UniqueEnemies.Altered_Gargoyle , "Ziggurat Passage" },
-            { UniqueEnemies.Ancestral_General , "Necropolis" },
-            { UniqueEnemies.Ancestral_Soldier , "Necropolis" },
-            { UniqueEnemies.Bloody_Alexis , "Undercity Passage" },
-            { UniqueEnemies.Calygrey_Hero , "Steam Bath Tunnels" },
-            { UniqueEnemies.Chromatic_Arcane_Elemental , "Compromised Mana Transfer Station" },
-            { UniqueEnemies.Cracked_Gargoyle , "Ark of the Exiled" },
-            { UniqueEnemies.Elemental_Parasite , "Crumbling Loading Docks" },
-            { UniqueEnemies.Executioner_Bug , "The Slide" },
-            { UniqueEnemies.Ghost_of_Vanasse , "Chersonese" },
-            { UniqueEnemies.Giant_Horror , "Crumbling Loading Docks" },
-            { UniqueEnemies.Glacial_Tuanosaur , "Conflux Chambers" },
-            { UniqueEnemies.Golden_Matriarch , "Voltaic Hatchery" },
-            { UniqueEnemies.Grandmother_Medyse , "Sulphuric Caverns" },
-            { UniqueEnemies.Greater_Grotesque , "Lost Golem Manufacturing Facility" },
-            { UniqueEnemies.Guardian_of_the_Compass , "Abrassar" },//"---The Walled Garden---" },
-            { UniqueEnemies.Kazite_Admiral , "Abandoned Living Quarters" },
-            { UniqueEnemies.Lightning_Dancer , "Ancient Foundry" },
-            { UniqueEnemies.Liquid_Cooled_Golem , "Destroyed Test Chambers" },
-            { UniqueEnemies.Luke_the_Pearlescent , "Abrassar" },//"---Ruins of Old Levant---" },
-            { UniqueEnemies.Mad_Captains_Bones , "Chersonese Misc. Dungeons" },//"---Pirates' Hideout---" },
-            { UniqueEnemies.Matriarch_Myrmitaur , "Myrmitaur’s Haven" },
-            { UniqueEnemies.Quartz_Elemental , "The Grotto of Chalcedony" },
-            { UniqueEnemies.Razorhorn_Stekosaur , "Reptilian Lair" },
-            { UniqueEnemies.Royal_Manticore , "Enmerkar Forest" },
-            { UniqueEnemies.Rusted_Enforcer , "Ghost Pass" },
-            { UniqueEnemies.Sandrose_Horror , "Sand Rose Cave" },
-            { UniqueEnemies.She_Who_Speaks , "The Vault of Stone" },
-            { UniqueEnemies.That_Annoying_Troglodyte , "Jade Quarry" },
-            { UniqueEnemies.The_Crusher , "Ancestor’s Resting Place" },
-            { UniqueEnemies.The_First_Cannibal , "Face of the Ancients" },
-            { UniqueEnemies.The_Last_Acolyte , "Stone Titan Caves" },
-            { UniqueEnemies.Thunderbolt_Golem , "Electric Lab" },
-            { UniqueEnemies.Titanic_Guardian_Mk_7 , "Ruined Warehouse" },
-            { UniqueEnemies.Troglodyte_Archmage , "Blister Burrow" },
-            { UniqueEnemies.Tyrant_of_the_Hive , "Forest Hives" },
-            { UniqueEnemies.Vile_Illuminator , "Cabal of Wind Temple" },
-            { UniqueEnemies.Virulent_Hiveman , "Ancient Hive" },
-            { UniqueEnemies.Volcanic_Gastrocin , "The Eldest Brother" },
-        };
+            { UniqueEnemies.Rusted_Enforcer, new("Rusted Enforcer", "GolemRusted (1)", "Unique_DefEd_RustyGolem", "Ed2bzrgz5k-cRx3bUYTfmg", "Ghost Pass", "Ghost Pass") },
 
-        // Reverse lookup
-        public static bool TryGetEnum(string name, out UniqueEnemies boss)
-        {
-            foreach (var kvp in Names)
-            {
-                if (kvp.Value.Equals(name, StringComparison.OrdinalIgnoreCase))
-                {
-                    boss = kvp.Key;
-                    return true;
-                }
-            }
-            boss = default;
-            return false;
-        }
+            { UniqueEnemies.Sandrose_Horror, new("Sandrose Horror", "ShelledHorrorBurning", "Unique_DefEd_SandroseHorror", "H7HoCKhBl0mC1j9UOECDrQ", "Sand Rose Cave", "Sand Rose Cave") },
+            { UniqueEnemies.She_Who_Speaks, new("She Who Speaks", "AncientDwellerSpeak", "Unique_DefEd_BossDweller", "MBooN38mU0GPjQJGRuJ95g", "The Vault of Stone", "The Vault of Stone") },
+            { UniqueEnemies.That_Annoying_Troglodyte, new("That Annoying Troglodyte", "TroglodyteAnnoying", "Unique_DefEd_AnnoyingTrog", "no-Z4ibpcEWbNntm_wRwZA", "Jade Quarry", "Jade Quarry") },
+            { UniqueEnemies.The_Crusher, new("The Crusher", "HumanCrusher (1)", "Unique_DefEd_DesertCrusher", "AZL-EjXmhkOYB1obj0VkTw", "Ancestor’s Resting Place", "Ancestor’s Resting Place") },
+            { UniqueEnemies.The_First_Cannibal, new("The First Cannibal", "WendigoCanibal", "Wildlife_Wendigo2", "wrYHXXh8J0KMhwoV8AC59w", "Face of the Ancients", "Face of the Ancients") },
+            { UniqueEnemies.The_Last_Acolyte, new("The Last Acolyte", "HumanAcolyte (1)", "Unique_DefEd_LastAcolyte", "YeYzQP-gYUmSivlk5JCJew", "Stone Titan Caves", "Stone Titan Caves") },
+            { UniqueEnemies.Thunderbolt_Golem, new("Thunderbolt Golem", "ForgeGolemLight (1)", "Unique_DefEd_ProtypeForgeGolem", "4qCAJzcAfEKNcl_c2k0r9g", "Electric Lab", "Electric Lab") },
+
+            { UniqueEnemies.Titanic_Guardian_Mk_7, new(
+                new ("Jade Lich", "TitanGolemHalberd", "Undead_LichJade", "65aI6XT89kmHa1bwJz5PGQ", "Ruined Warehouse", "Ruined Warehouse"),
+                new ("Jade Lich", "TitanGolemHammer", "Undead_LichJade", "G_Q0oH1ttkWAZXCMuaAHjA", "Ruined Warehouse", "Ruined Warehouse"),
+                new ("Jade Lich", "TitanGolemSword", "Undead_LichJade", "wj3frikyIkqwVv7myrc5gw", "Ruined Warehouse", "Ruined Warehouse") 
+            )},
+            { UniqueEnemies.Troglodyte_Archmage, new("Troglodyte Archmage", "TroglodyteArcMageDefEd (1)", "Unique_DefEd_TrogMage", "syKWNGT3QUO3nXxPt1WEcQ", "Blister Burrow", "Blister Burrow") },
+
+            { UniqueEnemies.Tyrant_of_the_Hive, new("Tyrant of the Hive", "HiveLord1AID+", "Undead_Hivelord2", "yOo-iKN3-0mAtZ2pG16pyw", "Forest Hives", "Forest Hives") },
+            { UniqueEnemies.Vile_Illuminator, new("Vile Illuminator", "IlluminatorHorrorVile", "Unique_DefEd_VileIlluminator", "l5ignQfsE0Cv4imB9DZJ5w", "Cabal of Wind Temple", "Cabal of Wind Temple") },
+            { UniqueEnemies.Virulent_Hiveman, new("Virulent Hiveman", "HiveManVirulent", "Unique_DefEd_VirulentHiveman", "v1PnLFpcxEmm_IrZaP-eyg", "Ancient Hive", "Ancient Hive") },
+            { UniqueEnemies.Volcanic_Gastrocin, new("Volcanic Gastrocin", "SlughellVolcanic", "Unique_DefEd_VolcanicSlug", "fEFTRdXp1kOWX-Z9OMAkBg", "The Eldest Brother", "The Eldest Brother") },
+        };
     }
 
 }

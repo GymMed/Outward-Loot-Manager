@@ -12,7 +12,7 @@ namespace OutwardLootManager.Utility.Helpers.Static
 {
     public static class LootRuleHelpers
     {
-        public static bool TryToFillRuleWithEnemyId(LootRule lootRule, EventPayload payload)
+        public static bool TryToFillRuleWithEnemyId(LootRule lootRule, EventPayload payload, bool required = false)
         {
             (string key, Type type, string description) enemyIdParameter = EventRegistryParamsHelper.Get(EventRegistryParams.EnemyId);
             string enemyId = payload.Get<string>(enemyIdParameter.key, null);
@@ -23,11 +23,13 @@ namespace OutwardLootManager.Utility.Helpers.Static
                 return true;
             }
 
-            OutwardLootManager.LogSL($"LootRuleHelpers@TryToFillRuleWithEnemyId didn't receive {enemyIdParameter.key} variable! Cannot add loot!");
+            if(required)
+                OutwardLootManager.LogSL($"LootRuleHelpers@TryToFillRuleWithEnemyId didn't receive {enemyIdParameter.key} variable! Cannot add loot!");
+
             return false;
         }
 
-        public static bool TryToFillRuleWithEnemyName(LootRule lootRule, EventPayload payload)
+        public static bool TryToFillRuleWithEnemyName(LootRule lootRule, EventPayload payload, bool required = false)
         {
             (string key, Type type, string description) enemyNameParameter = EventRegistryParamsHelper.Get(EventRegistryParams.EnemyName);
             string enemyName = payload.Get<string>(enemyNameParameter.key, null);
@@ -38,7 +40,9 @@ namespace OutwardLootManager.Utility.Helpers.Static
                 return true;
             }
 
-            OutwardLootManager.LogSL($"LootRuleHelpers@TryToFillRuleWithEnemyName didn't receive {enemyNameParameter.key} variable! Cannot add loot!");
+            if(required)
+                OutwardLootManager.LogSL($"LootRuleHelpers@TryToFillRuleWithEnemyName didn't receive {enemyNameParameter.key} variable! Cannot add loot!");
+
             return false;
         }
 
@@ -65,6 +69,38 @@ namespace OutwardLootManager.Utility.Helpers.Static
             return lootRule.areaFamily != null
                 || lootRule.area.HasValue
                 || lootRule.faction.HasValue;
+        }
+
+        public static bool FillRuleWithExceptions(LootRule lootRule, EventPayload payload)
+        {
+            bool filledIdExceptions = FillRuleWithIdExceptions(lootRule, payload);
+            bool filledNameExceptions = FillRuleWithNameExceptions(lootRule, payload);
+
+            return filledIdExceptions || filledNameExceptions;
+        }
+
+        public static bool FillRuleWithIdExceptions(LootRule lootRule, EventPayload payload)
+        {
+            (string key, Type type, string description) exceptIdsParameter = EventRegistryParamsHelper.Get(EventRegistryParams.ExceptIds);
+            List<string> exceptIds = payload.Get<List<string>>(exceptIdsParameter.key, null);
+
+            if (exceptIds == null)
+                return false;
+
+            lootRule.exceptIds = exceptIds;
+            return true;
+        }
+
+        public static bool FillRuleWithNameExceptions(LootRule lootRule, EventPayload payload)
+        {
+            (string key, Type type, string description) exceptNamesParameter = EventRegistryParamsHelper.Get(EventRegistryParams.ExceptNames);
+            List<string> exceptNames = payload.Get<List<string>>(exceptNamesParameter.key, null);
+
+            if (exceptNames == null)
+                return false;
+
+            lootRule.exceptNames = exceptNames;
+            return true;
         }
 
         public static bool FillRuleForStrongEnemyTypes(LootRule lootRule, EventPayload payload)

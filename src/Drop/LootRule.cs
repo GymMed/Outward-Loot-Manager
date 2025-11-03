@@ -1,5 +1,6 @@
 ﻿using OutwardLootManager.Managers;
 using OutwardLootManager.Utility.Enums;
+using OutwardLootManager.Utility.Extensions;
 using OutwardLootManager.Utility.Helpers.Static;
 using System;
 using System.Collections.Generic;
@@ -30,9 +31,14 @@ namespace OutwardLootManager.Drop
         public bool isUniqueArenaBoss = false;
         public bool isUniqueEnemy = false;
 
-        public LootRule(string id = null, string enemyId = null, string enemyName = "", AreaFamily areaFamily = null, ItemDropRate itemDropRate = null)
+        public List<string> exceptNames = null;
+        public List<string> exceptIds = null;
+
+        public LootRule(string id = null, string enemyId = null, string enemyName = "", 
+            AreaFamily areaFamily = null, ItemDropRate itemDropRate = null, 
+            List<string> exceptNames = null, List<string> exceptIds = null)
         {
-            if(string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(id))
                 this.id = UID.Generate().Value;
             else
                 this.id = id;
@@ -41,6 +47,8 @@ namespace OutwardLootManager.Drop
             this.enemyName = enemyName;
             this.areaFamily = areaFamily;
             this.itemDropRate = itemDropRate;
+            this.exceptNames = exceptNames;
+            this.exceptIds = exceptIds;
         }
 
         public bool Matches(Character character)
@@ -57,6 +65,12 @@ namespace OutwardLootManager.Drop
                 !character.Name.Equals(enemyName, StringComparison.OrdinalIgnoreCase))
                 return false;
 
+            if (exceptIds != null && exceptIds.Contains(character.UID.Value))
+                return false;
+
+            if (exceptNames != null && exceptNames.Contains(character.Name))
+                return false;
+
             if (faction.HasValue && character.Faction != faction.Value)
                 return false;
 
@@ -71,32 +85,63 @@ namespace OutwardLootManager.Drop
 
             if (areaFamily != null)
             {
-                return AreaFamiliesHelpers.DoesAreaFamilyMatch(areaFamily);
+                if (!AreaFamiliesHelpers.DoesAreaFamilyMatch(areaFamily))
+                    return false;
             }
 
             if(isBoss)
             {
-                return BossRegistryManager.Instance.IsBoss(character.Name);
+                if (!BossRegistryManager.Instance.IsBoss(character))
+                    return false;
+            }
+            else
+            {
+                if (BossRegistryManager.Instance.IsBoss(character))
+                    return false;
             }
 
             if(isUniqueArenaBoss)
             {
-                return UniqueArenaBossesHelper.TryGetEnum(character.Name, out UniqueArenaBosses boss);
+                if (!UniqueArenaBossesHelper.Enemies.TryGetEnum(character, out UniqueArenaBosses boss))
+                    return false;
+            }
+            else
+            {
+                if (BossRegistryManager.Instance.IsBossOfCategory(character.UID.Value, BossCategories.Arena))
+                    return false;
             }
 
             if(isStoryBoss)
             {
-                return StoryBossesHelper.TryGetEnum(character.Name, out StoryBosseses boss);
+                if (!StoryBossesHelper.Enemies.TryGetEnum(character, out StoryBosseses boss))
+                    return false;
+            }
+            else
+            {
+                if (BossRegistryManager.Instance.IsBossOfCategory(character.UID.Value, BossCategories.Story))
+                    return false;
             }
 
             if(isBossPawn)
             {
-                return BossPawnsHelper.TryGetEnum(character.Name, out BossPawns boss);
+                if (!BossPawnsHelper.Enemies.TryGetEnum(character, out BossPawns boss))
+                    return false;
+            }
+            else
+            {
+                if (BossRegistryManager.Instance.IsBossOfCategory(character.UID.Value, BossCategories.Pawn))
+                    return false;
             }
 
             if(isUniqueEnemy)
             {
-                return UniqueEnemiesHelper.TryGetEnum(character.Name, out UniqueEnemies enemy);
+                if (!UniqueEnemiesHelper.Enemies.TryGetEnum(character, out UniqueEnemies enemy))
+                    return false;
+            }
+            else
+            {
+                if (UniqueEnemiesHelper.Enemies.TryGetEnum(character, out UniqueEnemies enemy))
+                    return false;
             }
 
             return true;

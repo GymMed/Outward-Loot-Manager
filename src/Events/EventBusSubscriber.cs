@@ -81,6 +81,8 @@ namespace OutwardLootManager.Events
                 return;
             }
 
+            bool hasExceptions = LootRuleHelpers.FillRuleWithExceptions(lootRule, payload);
+
             LootRuleRegistryManager.Instance.AppendLootRule(lootRule);
         }
 
@@ -91,7 +93,7 @@ namespace OutwardLootManager.Events
             LootRule lootRule = new LootRule();
             LootRuleHelpers.TryToFillRuleWithId(lootRule, payload);
 
-            if (!LootRuleHelpers.TryToFillRuleWithEnemyName(lootRule, payload))
+            if (!LootRuleHelpers.TryToFillRuleWithEnemyName(lootRule, payload, true))
                 return;
 
             bool hasRetrievedChances = LootRuleHelpers.GetItemDropRateAndFillInRule(lootRule, payload);
@@ -106,6 +108,8 @@ namespace OutwardLootManager.Events
             }
             LootRuleHelpers.FillRuleWithEnvironmentConditions(lootRule, payload);
 
+            bool hasIdExceptions = LootRuleHelpers.FillRuleWithIdExceptions(lootRule, payload);
+
             LootRuleRegistryManager.Instance.AppendLootRule(lootRule);
         }
 
@@ -116,7 +120,7 @@ namespace OutwardLootManager.Events
             LootRule lootRule = new LootRule();
             LootRuleHelpers.TryToFillRuleWithId(lootRule, payload);
 
-            if (!LootRuleHelpers.TryToFillRuleWithEnemyId(lootRule, payload))
+            if (!LootRuleHelpers.TryToFillRuleWithEnemyId(lootRule, payload, true))
                 return;
 
             bool hasRetrievedChances = LootRuleHelpers.GetItemDropRateAndFillInRule(lootRule, payload);
@@ -164,6 +168,8 @@ namespace OutwardLootManager.Events
                     $"{EventRegistryParamsHelper.Get(EventRegistryParams.IsForUniqueEnemies).key}! Cannot add loot!");
                 return;
             }
+
+            bool hasExceptions = LootRuleHelpers.FillRuleWithExceptions(lootRule, payload);
 
             LootRuleRegistryManager.Instance.AppendLootRule(lootRule);
         }

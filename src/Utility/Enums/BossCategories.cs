@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OutwardLootManager.Utility.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,16 +17,26 @@ namespace OutwardLootManager.Utility.Enums
     public struct BossID
     {
         public BossCategories Category;
-        public string Name;
+        public EnemyIdentificationGroupData EnemyData;
         public Enum EnumValue;
 
-        public BossID(BossCategories category, string name, Enum enumValue = null)
+        public BossID(BossCategories category, EnemyIdentificationGroupData data, Enum enumValue = null)
         {
             Category = category;
-            Name = name;
+            EnemyData = data;
             EnumValue = enumValue;
         }
 
-        public override string ToString() => $"{Category}:{Name}";
+        public override string ToString()
+        {
+            string enemiesData = "";
+
+            foreach(EnemyIdentificationData enemy in EnemyData.Enemies)
+            {
+                enemiesData += $"Name {enemy.DisplayName} Id {enemy.ID} enum {EnumValue.ToString()}";
+            }
+
+            return $"{Category}:{enemiesData}";
+        }
     }
 }

@@ -153,6 +153,10 @@ namespace OutwardLootManager.Managers
 
                 lootRule.area = AreaHelpers.GetAreaEnumFromAreaName(loot.AreaName);
                 lootRule.faction = loot.Faction;
+
+                lootRule.exceptIds = loot.ExceptIds;
+                lootRule.exceptNames = loot.ExceptNames;
+
                 lootRule.isBoss = loot.IsBoss;
                 lootRule.isBossPawn = loot.IsBossPawn;
                 lootRule.isStoryBoss = loot.IsStoryBoss;
@@ -210,6 +214,8 @@ namespace OutwardLootManager.Managers
                     FactionName = lootRule.faction?.ToString() ?? "",
                     AreaName = lootRule.area?.ToString() ?? "",
                     ItemDropRate = itemDropRateSerializable,
+                    ExceptIds = lootRule.exceptIds ?? null,
+                    ExceptNames = lootRule.exceptNames ?? null,
                     IsBoss = lootRule.isBoss,
                     IsBossPawn = lootRule.isBossPawn,
                     IsStoryBoss = lootRule.isStoryBoss,

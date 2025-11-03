@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OutwardLootManager.Utility.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,47 +16,14 @@ namespace OutwardLootManager.Utility.Enums
 
     public static class BossPawnsHelper
     {
-        public static readonly Dictionary<BossPawns, string> Names = new()
+        public static readonly Dictionary<BossPawns, EnemyIdentificationGroupData> Enemies = new()
         {
-            { BossPawns.Elite_Krypteia_Warrior, "Elite Krypteia Warrior" },
-            { BossPawns.Elite_Krypteia_Witch, "Elite Krypteia Witch" },
-            { BossPawns.Elite_Obsidian_Elemental, "Elite Obsidian Elemental" },
+            { BossPawns.Elite_Krypteia_Warrior, new("Balira", "KrypteiaGuard", "name_unpc_balira_01", "AbvgKMnPLUiffB6LzjaguQ", "Tower of Regrets Arena", "Unknown Arena", "CalderaDungeonsBosses") },
+            { BossPawns.Elite_Krypteia_Witch, new("Balira", "KrypteiaMage", "name_unpc_balira_01", "MfBjNPYsvkODdyLjYrlXXw", "Tower of Regrets Arena", "Unknown Arena", "CalderaDungeonsBosses") },
+            { BossPawns.Elite_Obsidian_Elemental, new(
+                new ("Obsidian Elemental", "ObsidianElemental", "Wildlife_ObsidianElemental", "RM13rq4JTEqbuANnncMCKA", "Burning Tree Arena", "Unknown Arena", "EmercarDungeonsBosses"), 
+                new ("Obsidian Elemental (1)", "ObsidianElemental", "Wildlife_ObsidianElemental", "Qrq3e4nUpkS8CH3yd8J-ow", "Burning Tree Arena", "Unknown Arena", "EmercarDungeonsBosses")
+            ) },
         };
-
-        public static readonly Dictionary<BossPawns, string> NamesLoc = new()
-        {
-            { BossPawns.Elite_Krypteia_Warrior, "name_unpc_balira_01" },
-            { BossPawns.Elite_Krypteia_Witch, "name_unpc_balira_01" },
-            { BossPawns.Elite_Obsidian_Elemental, "Wildlife_ObsidianElemental" },
-        };
-
-        public static readonly Dictionary<BossPawns, string> WikiLocations = new()
-        {
-            { BossPawns.Elite_Krypteia_Warrior, "Tower of Regrets Arena" },
-            { BossPawns.Elite_Krypteia_Witch, "Tower of Regrets Arena" },
-            { BossPawns.Elite_Obsidian_Elemental, "Burning Tree Arena" },
-        };
-
-        public static readonly Dictionary<BossPawns, string> GameLocations = new()
-        {
-            { BossPawns.Elite_Krypteia_Warrior, "Unknown Arena" },
-            { BossPawns.Elite_Krypteia_Witch, "Unknown Arena" },
-            { BossPawns.Elite_Obsidian_Elemental, "Unknown Arena" },
-        };
-
-        // Reverse lookup
-        public static bool TryGetEnum(string name, out BossPawns boss)
-        {
-            foreach (var kvp in Names)
-            {
-                if (kvp.Value.Equals(name, StringComparison.OrdinalIgnoreCase))
-                {
-                    boss = kvp.Key;
-                    return true;
-                }
-            }
-            boss = default;
-            return false;
-        }
     }
 }

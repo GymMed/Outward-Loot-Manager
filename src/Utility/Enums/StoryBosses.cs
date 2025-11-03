@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OutwardLootManager.Utility.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,56 +18,13 @@ namespace OutwardLootManager.Utility.Enums
 
     public static class StoryBossesHelper
     {
-        public static readonly Dictionary<StoryBosseses, string> Names = new()
+        public static readonly Dictionary<StoryBosseses, EnemyIdentificationGroupData> Enemies = new()
         {
-            { StoryBosseses.Crimson_Avatar, "Crimson Avatar" },
-            { StoryBosseses.Djinn, "Djinn" },
-            { StoryBosseses.Forge_Master, "Forge Master" },
-            { StoryBosseses.Light_Mender, "Light Mender" },
-            { StoryBosseses.Plague_Doctor, "Plague Doctor" },
+            { StoryBosseses.Crimson_Avatar, new("Burning Man", "CrimsonAvatar (1)", "Undead_BurningMan", "4eeggsSn2Eyah4IjjqvpYQ", "Scarlet Sanctuary", "Scarlet Sanctuary") },
+            { StoryBosseses.Djinn, new("Gold Lich", "LichGold", "Undead_LichGold", "EwoPQ0iVwkK-XtNuaVPf3g", "Oil Refinery", "Oil Refinery") },
+            { StoryBosseses.Forge_Master, new("Jade Lich", "LichRust", "Undead_LichJade", "shyc5M7b-UGVHBZsJMdP4Q", "Forgotten Research Laboratory", "Forgotten Research Laboratory") },
+            { StoryBosseses.Light_Mender, new("Gold Lich", "LichGold", "Undead_LichGold", "EwoPQ0iVwkK-XtNuaVPf3g", "Spire of Light", "Spire of Light") },
+            { StoryBosseses.Plague_Doctor, new("Jade Lich", "LichJade", "Undead_LichJade", "8sjFFBPMvkuJcrcyIYs-KA", "Dark Ziggurat", "Dark Ziggurat Interior") }
         };
-
-        public static readonly Dictionary<StoryBosseses, string> NamesLoc = new()
-        {
-            { StoryBosseses.Crimson_Avatar, "name_unpc_Avatar" },
-            { StoryBosseses.Djinn, "name_unpc_Caldera_Djinn" },
-            { StoryBosseses.Forge_Master, "name_unpc_forgemaster_01" },
-            //{ StoryBosseses.Forge_Master, "Boss_RustLich" },
-            { StoryBosseses.Light_Mender, "name_unpc_GoldLich_01" },
-            { StoryBosseses.Plague_Doctor, "name_unpc_JadeLich_01" },
-        };
-
-        public static readonly Dictionary<StoryBosseses, string> WikiLocations = new()
-        {
-            { StoryBosseses.Crimson_Avatar, "Scarlet Sanctuary" },
-            { StoryBosseses.Djinn, "Oil Refinery" },
-            { StoryBosseses.Forge_Master, "Forgotten Research Laboratory" },
-            { StoryBosseses.Light_Mender, "Spire of Light" },
-            { StoryBosseses.Plague_Doctor, "Dark Ziggurat" },
-        };
-
-        public static readonly Dictionary<StoryBosseses, string> GameLocations = new()
-        {
-            { StoryBosseses.Crimson_Avatar, "Scarlet Sanctuary" },
-            { StoryBosseses.Djinn, "Oil Refinery" },
-            { StoryBosseses.Forge_Master, "Forgotten Research Laboratory" },
-            { StoryBosseses.Light_Mender, "Spire of Light" },
-            { StoryBosseses.Plague_Doctor, "Dark Ziggurat Interior" },// have to use Interior because Dark Ziggurat is unfinished and can't load? is not provided in cheat menu too.
-        };
-
-        // Reverse lookup
-        public static bool TryGetEnum(string name, out StoryBosseses boss)
-        {
-            foreach (var kvp in Names)
-            {
-                if (kvp.Value.Equals(name, StringComparison.OrdinalIgnoreCase))
-                {
-                    boss = kvp.Key;
-                    return true;
-                }
-            }
-            boss = default;
-            return false;
-        }
     }
 }

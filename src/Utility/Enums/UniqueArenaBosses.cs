@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OutwardLootManager.Utility.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,133 +40,48 @@ namespace OutwardLootManager.Utility.Enums
 
     public static class UniqueArenaBossesHelper
     {
-        public static readonly Dictionary<UniqueArenaBosses, string> Names = new()
-        {
-            { UniqueArenaBosses.Ash_Giant_Highmonk, "Ash Giant Highmonk" },
-            { UniqueArenaBosses.Brand_Squire, "Elite Brand Squire" },
-            { UniqueArenaBosses.Breath_of_Darkness, "Breath of Darkness" },
-            { UniqueArenaBosses.Calixa_Boss, "Elite Calixa" },
-            { UniqueArenaBosses.Concealed_Knight, "Concealed Knight: ???" },
-            { UniqueArenaBosses.Elite_Alpha_Tuanosaur, "Elite Alpha Tuanosaur" },
-            { UniqueArenaBosses.Elite_Ash_Giant, "Elite Ash Giant" },
-            { UniqueArenaBosses.Elite_Beast_Golem, "Elite Beast Golem" },
-            { UniqueArenaBosses.Elite_Boozu, "Elite Boozu" },
-            { UniqueArenaBosses.Elite_Burning_Man, "Elite Burning Man" },
-            { UniqueArenaBosses.Elite_Crescent_Shark, "Elite Crescent Shark" },
-            { UniqueArenaBosses.Elite_Crimson_Avatar, "Elite Crimson Avatar" },
-            { UniqueArenaBosses.Elite_Gargoyle_Alchemist, "Elite Gargoyle Alchemist" },
-            { UniqueArenaBosses.Elite_Gargoyle_Mage, "Elite Gargoyle Mage" },
-            { UniqueArenaBosses.Elite_Gargoyle_Warrior, "Elite Gargoyle Warrior" },
-            { UniqueArenaBosses.Elite_Mantis_Shrimp, "Elite Mantis Shrimp" },
-            { UniqueArenaBosses.Elite_Sublime_Shell, "Elite Sublime Shell" },
-            { UniqueArenaBosses.Elite_Torcrab, "Elite Torcrab" },
-            { UniqueArenaBosses.Grandmother, "Grandmother" },
-            { UniqueArenaBosses.Immaculate_Dreamer, "Immaculate Dreamer" },
-            { UniqueArenaBosses.Immaculates_Bird, "Immaculate's Bird" },
-            { UniqueArenaBosses.Light_Mender, "Light Mender" },
-            { UniqueArenaBosses.Plague_Doctor, "Plague Doctor" },
-            { UniqueArenaBosses.Troglodyte_Queen, "Troglodyte Queen" },
-        };
 
-        public static readonly Dictionary<UniqueArenaBosses, string> NamesLoc = new()
+        public static readonly Dictionary<UniqueArenaBosses, EnemyIdentificationGroupData> Enemies = new()
         {
-            { UniqueArenaBosses.Ash_Giant_Highmonk, "Giant_Priest" },
-            { UniqueArenaBosses.Brand_Squire, "Bandit_Desert_Basic" },
-            { UniqueArenaBosses.Breath_of_Darkness, "Elite_Dweller" },
-            { UniqueArenaBosses.Calixa_Boss, "Cyrene" },
-            { UniqueArenaBosses.Concealed_Knight, "name_unpc_unknown_01" },
-            { UniqueArenaBosses.Elite_Alpha_Tuanosaur, "Wildlife_TuanosaurAlpha" },
-            { UniqueArenaBosses.Elite_Ash_Giant, "Giant_Guard" },
-            { UniqueArenaBosses.Elite_Beast_Golem, "Golem_Beast" },
-            { UniqueArenaBosses.Elite_Boozu, "Wildlife_BladeDancer" },
-            { UniqueArenaBosses.Elite_Burning_Man, "Undead_BurningMan" },
-            { UniqueArenaBosses.Elite_Crescent_Shark, "Wildlife_CrescentShark" },
-            { UniqueArenaBosses.Elite_Crimson_Avatar, "Undead_BurningMan" },
-            { UniqueArenaBosses.Elite_Gargoyle_Alchemist, "Horror_Shell" },
-            { UniqueArenaBosses.Elite_Gargoyle_Mage, "Horror_Shell" },
-            { UniqueArenaBosses.Elite_Gargoyle_Warrior, "Horror_Shell" },
-            { UniqueArenaBosses.Elite_Mantis_Shrimp, "Wildlife_Shrimp" },
-            { UniqueArenaBosses.Elite_Sublime_Shell, "Nicolas" },
-            { UniqueArenaBosses.Elite_Torcrab, "Wildlife_Torcrab" },
-            { UniqueArenaBosses.Grandmother, "Undead_Ghost" },
-            { UniqueArenaBosses.Immaculate_Dreamer, "Horror_Immaculate" },//EliteImmaculate
-            { UniqueArenaBosses.Immaculates_Bird, "Horror_Immaculate" },
-            { UniqueArenaBosses.Light_Mender, "Undead_LichGold" },
-            { UniqueArenaBosses.Plague_Doctor, "Undead_LichJade" },
-            { UniqueArenaBosses.Troglodyte_Queen, "Troglodyte_Mana" },
-            //{ UniqueArenaBosses.Light_Mender, "name_unpc_GoldLich_01" },
-        };
+            { UniqueArenaBosses.Ash_Giant_Highmonk, new("Ash Giant Priest", "EliteAshGiantPriest", "Giant_Priest", "UnIXpnDMzUSfBu4S-ZDgsA", "Giant's Village Arena (south)", "Unknown Arena", "HallowedDungeonsBosses") },
+            { UniqueArenaBosses.Brand_Squire, new("Desert Bandit", "EliteBrandSquire", "Bandit_Desert_Basic", "sb0TOkOPS06jhp56AOYJCw", "Conflux Mountain Arena", "Unknown Arena", "ChersoneseDungeonsBosses") },
+            { UniqueArenaBosses.Breath_of_Darkness, new("Breath of Darkness", "AncientDwellerDark", "Elite_Dweller", "JmeufMpL_E6eYnqCYP2r3w", "The Vault of Stone", "The Vault of Stone") },
+            { UniqueArenaBosses.Calixa_Boss, new("Cyrene", "EliteCalixa", "Cyrene", "eCz766tEIEOWfK81om19wg", "Levant Arena", "Unknown Arena", "AbrassarDungeonsBosses") },
+            { UniqueArenaBosses.Concealed_Knight, new("???", "NewBandit", "name_unpc_unknown_01", "XVuyIaCAVkatv89kId9Uqw", "Shipwreck (Castaway)", "CierzoTutorial", "CierzoTutorial") },
 
-        //gotten through Area.GetName()
-        public static readonly Dictionary<UniqueArenaBosses, string> WikiLocations = new()
-        {
-            { UniqueArenaBosses.Ash_Giant_Highmonk, "Giant's Village Arena (south)" },
-            { UniqueArenaBosses.Brand_Squire, "Conflux Mountain Arena" },
-            { UniqueArenaBosses.Breath_of_Darkness, "The Vault of Stone" },
-            { UniqueArenaBosses.Calixa_Boss, "Levant Arena" },
-            { UniqueArenaBosses.Concealed_Knight, "Shipwreck (Castaway)" },
-            { UniqueArenaBosses.Elite_Alpha_Tuanosaur, "Ziggurat Passage Arena" },
-            { UniqueArenaBosses.Elite_Ash_Giant, "Unknown Arena" },
-            { UniqueArenaBosses.Elite_Beast_Golem, "Parched Shipwrecks Arena" },
-            { UniqueArenaBosses.Elite_Boozu, "Mana Lake Arena" },
-            { UniqueArenaBosses.Elite_Burning_Man, "Burning Tree Arena" },
-            { UniqueArenaBosses.Elite_Crescent_Shark, "Electric Lab Arena" },
-            { UniqueArenaBosses.Elite_Crimson_Avatar, "Vault of Stone Arena" },
-            { UniqueArenaBosses.Elite_Gargoyle_Alchemist, "New Sirocco Arena" },
-            { UniqueArenaBosses.Elite_Gargoyle_Mage, "New Sirocco Arena" },
-            { UniqueArenaBosses.Elite_Gargoyle_Warrior, "New Sirocco Arena" },
-            { UniqueArenaBosses.Elite_Mantis_Shrimp, "Voltaic Hatchery Arena" },
-            { UniqueArenaBosses.Elite_Sublime_Shell, "Isolated Windmill Arena" },
-            { UniqueArenaBosses.Elite_Torcrab, "River of Red Arena" },
-            { UniqueArenaBosses.Grandmother, "Tower of Regrets Arena" },
-            { UniqueArenaBosses.Immaculate_Dreamer, "Cabal of Wind Temple Arena" },//EliteImmaculate
-            { UniqueArenaBosses.Immaculates_Bird, "Immaculate's Camp Arena" },
-            { UniqueArenaBosses.Light_Mender, "Spire of Light" },
-            { UniqueArenaBosses.Plague_Doctor, "Dark Ziggurat" },
-            { UniqueArenaBosses.Troglodyte_Queen, "Blister Burrow Arena" },
-        };
+            { UniqueArenaBosses.Elite_Alpha_Tuanosaur, new("Alpha Tuanosaur", "EliteTuanosaurAlpha", "Wildlife_TuanosaurAlpha", "El8bA54i4E6vZraXsVZMow", "Ziggurat Passage Arena", "Unknown Arena", "HallowedDungeonsBosses") },
 
-        public static readonly Dictionary<UniqueArenaBosses, string> GameLocations = new()
-        {
-            { UniqueArenaBosses.Ash_Giant_Highmonk, "Unknown Arena" },
-            { UniqueArenaBosses.Brand_Squire, "Unknown Arena" },
-            { UniqueArenaBosses.Breath_of_Darkness, "The Vault of Stone" },
-            { UniqueArenaBosses.Calixa_Boss, "Unknown Arena" },
-            { UniqueArenaBosses.Concealed_Knight, "Unknown Arena" },
-            { UniqueArenaBosses.Elite_Alpha_Tuanosaur, "Unknown Arena" },
-            { UniqueArenaBosses.Elite_Ash_Giant, "Unknown Arena" },
-            { UniqueArenaBosses.Elite_Beast_Golem, "Unknown Arena" },
-            { UniqueArenaBosses.Elite_Boozu, "Unknown Arena" },
-            { UniqueArenaBosses.Elite_Burning_Man, "Unknown Arena" },
-            { UniqueArenaBosses.Elite_Crescent_Shark, "Unknown Arena" },
-            { UniqueArenaBosses.Elite_Crimson_Avatar, "Unknown Arena" },
-            { UniqueArenaBosses.Elite_Gargoyle_Alchemist, "Unknown Arena" },
-            { UniqueArenaBosses.Elite_Gargoyle_Mage, "Unknown Arena" },
-            { UniqueArenaBosses.Elite_Gargoyle_Warrior, "Unknown Arena" },
-            { UniqueArenaBosses.Elite_Mantis_Shrimp, "Unknown Arena" },
-            { UniqueArenaBosses.Elite_Sublime_Shell, "Unknown Arena" },
-            { UniqueArenaBosses.Elite_Torcrab, "Unknown Arena" },
-            { UniqueArenaBosses.Grandmother, "Unknown Arena" },
-            { UniqueArenaBosses.Immaculate_Dreamer, "Unknown Arena" },
-            { UniqueArenaBosses.Immaculates_Bird, "Unknown Arena" },
-            { UniqueArenaBosses.Light_Mender, "Spire of Light" },
-            { UniqueArenaBosses.Plague_Doctor, "Dark Ziggurat Interior" },
-            { UniqueArenaBosses.Troglodyte_Queen, "Unknown Arena" },
-        };
+            { UniqueArenaBosses.Elite_Ash_Giant, new(
+                new("Ash Giant", "EliteAshGiantPaf", "Giant_Guard", "3vXChaIK90qgq03PmsHFCg", "Unknown Arena", "Unknown Arena", "HallowedDungeonsBosses"),
+                new("Ash Giant", "EliteAshGiantPif", "Giant_Guard", "851czvFVDUaB42CgVzfKdg", "Unknown Arena", "Unknown Arena", "HallowedDungeonsBosses"),
+                new("Ash Giant", "EliteAshGiantPouf", "Giant_Guard", "kNmmOHZzKU-82F3OoX9NXw", "Unknown Arena", "Unknown Arena", "HallowedDungeonsBosses")
+                )
+            },
 
-        // Reverse lookup
-        public static bool TryGetEnum(string name, out UniqueArenaBosses boss)
-        {
-            foreach (var kvp in Names)
-            {
-                if (kvp.Value.Equals(name, StringComparison.OrdinalIgnoreCase))
-                {
-                    boss = kvp.Key;
-                    return true;
-                }
-            }
-            boss = default;
-            return false;
-        }
+            { UniqueArenaBosses.Elite_Beast_Golem, new("Beast Golem", "EliteBeastGolem", "Golem_Beast", "n83g2QJhwUyUrN469WC4jA", "Parched Shipwrecks Arena", "Unknown Arena", "AbrassarDungeonsBosses") },
+            { UniqueArenaBosses.Elite_Boozu, new("Blade Dancer", "BoozuProudBeast", "Wildlife_BladeDancer", "2Ef5z9OfYkev7M7Oi9GN-A", "Mana Lake Arena", "Unknown Arena", "AntiqueFieldDungeonsBosses") },
+            { UniqueArenaBosses.Elite_Burning_Man, new("Burning Man", "EliteBurningMan", "Undead_BurningMan", "JmeufMpL_E6eYnqCYP2r3w", "Burning Tree Arena", "Unknown Arena", "EmercarDungeonsBosses") },
+
+            { UniqueArenaBosses.Elite_Crescent_Shark, new(
+                new("Crescent Shark", "EliteCrescentShark", "Wildlife_CrescentShark", "RM13rq4JTEqbuANnncMCKA", "Electric Lab Arena", "Unknown Arena", "AbrassarDungeonsBosses"),
+                new("Crescent Shark", "EliteCrescentShark (1)", "Wildlife_CrescentShark", "ElDi5-rvqEqJKcXhEdgwBQ", "Electric Lab Arena", "Unknown Arena", "AbrassarDungeonsBosses"),
+                new("Crescent Shark", "EliteCrescentShark (2)", "Wildlife_CrescentShark", "z3sfjJtqQEmUZ_S6g2RPIg", "Electric Lab Arena", "Unknown Arena", "AbrassarDungeonsBosses")
+                )
+            },
+
+            { UniqueArenaBosses.Elite_Crimson_Avatar, new("Burning Man", "CrimsonAvatarElite (1)", "Undead_BurningMan", "JmeufMpL_E6eYnqCYP2r3w", "Vault of Stone Arena", "Unknown Arena", "CalderaDungeonsBosses") },
+            { UniqueArenaBosses.Elite_Gargoyle_Alchemist, new("Shell Horror", "GargoyleBossMelee (1)", "Horror_Shell", "Z6yTTWK4u0GjDPfZ9X332A", "New Sirocco Arena", "Unknown Arena", "CalderaDungeonsBosses") },
+            { UniqueArenaBosses.Elite_Gargoyle_Mage, new("Shell Horror", "GargoyleBossMelee (1)", "Horror_Shell", "Z6yTTWK4u0GjDPfZ9X332A", "New Sirocco Arena", "Unknown Arena", "CalderaDungeonsBosses") },
+            { UniqueArenaBosses.Elite_Gargoyle_Warrior, new("Shell Horror", "GargoyleBossMelee (1)", "Horror_Shell", "Z6yTTWK4u0GjDPfZ9X332A", "New Sirocco Arena", "Unknown Arena", "CalderaDungeonsBosses") },
+            { UniqueArenaBosses.Elite_Mantis_Shrimp, new("Mantis Shrimp", "EliteMantisShrimp", "Wildlife_Shrimp", "RM13rq4JTEqbuANnncMCKA", "Voltaic Hatchery Arena", "Unknown Arena", "ChersoneseDungeonsBosses") },
+            { UniqueArenaBosses.Elite_Sublime_Shell, new("Nicolas", "CageArmorBoss (1)", "Nicolas", "X-dfltOoGUm7YlCE_Li1zQ", "Isolated Windmill Arena", "Unknown Arena", "AntiqueFieldDungeonsBosses") },
+            { UniqueArenaBosses.Elite_Torcrab, new("Wildlife_Torcrab", "TorcrabGiant (1)", "Wildlife_Torcrab", "gQDvpLQh3kimgwMmvXJc4g", "River of Red Arena", "Unknown Arena", "CalderaDungeonsBosses") },
+            { UniqueArenaBosses.Grandmother, new("Ghost", "Grandmother", "Undead_Ghost", "7G5APgUksEGdQrBxKXr04g", "Tower of Regrets Arena", "Unknown Arena", "CalderaDungeonsBosses") },
+            { UniqueArenaBosses.Immaculate_Dreamer, new("Immaculate", "EliteImmaculate", "Horror_Immaculate", "9jsiejBtHkOzeo4tOyyweg", "Cabal of Wind Temple Arena", "Unknown Arena", "EmercarDungeonsBosses") },
+            { UniqueArenaBosses.Immaculates_Bird, new("Immaculate", "EliteSupremeShell (1)", "Horror_Immaculate", "JsyOv_Cwu0K0HlXyZInRQQ", "Immaculate's Camp Arena", "Unknown Arena", "AntiqueFieldDungeonsBosses") },
+            { UniqueArenaBosses.Light_Mender, new("Gold Lich", "LichGold (1)", "Undead_LichGold", "v9mN1u1uMkaxsncBXhIM9A", "Spire of Light", "Unknown Arena", "EmercarDungeonsBosses") },
+            { UniqueArenaBosses.Plague_Doctor, new("Jade Lich", "LichJade (1)", "Undead_LichJade", "GfWl16_MZ0uS7UYIKpS5Lg", "Dark Ziggurat", "Unknown Arena", "EmercarDungeonsBosses") },
+            { UniqueArenaBosses.Troglodyte_Queen, new("Mana Troglodyte", "TroglodyteMana (1)", "Troglodyte_Mana", "6eGdsaRYfUy-9OlTVXR8rw", "Blister Burrow Arena", "Unknown Arena", "ChersoneseDungeonsBosses") },
+        };
     }
 }

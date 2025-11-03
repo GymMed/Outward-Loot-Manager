@@ -52,18 +52,26 @@ namespace OutwardLootManager.Events
             // Chance reduction missing and can be provided but not needed?
         };
 
+        private static readonly (string key, Type type, string description)[] ExceptionsParams =
+        {
+            EventRegistryParamsHelper.Get(EventRegistryParams.ExceptIds),
+            EventRegistryParamsHelper.Get(EventRegistryParams.ExceptNames),
+        };
+
         public static void RegisterEvents()
         {
             // Emitter/Publishers has GUID
             EventBus.RegisterEvent(
                 OutwardLootManager.GUID,
                 EventBusPublisher.Event_AppendLootRule,
+                "Publishes event on appending loot rule to loot manager.",
                 EventRegistryParamsHelper.Get(EventRegistryParams.LootRuleId)
             );
 
             EventBus.RegisterEvent(
                 OutwardLootManager.GUID,
                 EventBusPublisher.Event_RemoveLootRule,
+                "Publishes event on removing loot rule from loot manager.",
                 EventRegistryParamsHelper.Get(EventRegistryParams.LootRuleId)
             );
 
@@ -71,31 +79,36 @@ namespace OutwardLootManager.Events
             EventBus.RegisterEvent(
                 OutwardLootManager.EVENT_BUS_ALL_GUID,
                 EventBusSubscriber.Event_LoadCustomLoots,
+                "Listens for event, when to load custom loot rules from xml.",
                 EventRegistryParamsHelper.Get(EventRegistryParams.LoadLootsXmlFilePath)
             );
 
             EventBus.RegisterEvent(
                 OutwardLootManager.EVENT_BUS_ALL_GUID,
                 EventBusSubscriber.Event_StoreLootToXml,
+                "Listens for event, when to store loot manager loot rules to xml.",
                 EventRegistryParamsHelper.Get(EventRegistryParams.StoreLootsXmlFilePath)
             );
 
             EventBus.RegisterEvent(
                 OutwardLootManager.EVENT_BUS_ALL_GUID,
                 EventBusSubscriber.Event_AddLoot,
+                "Very abstract way to add loot rules. It allows you pass all the possible variables to determine if loot should be applied to a character.",
                 EventRegistryParamsHelper.Combine(
                     EventRegistryParamsHelper.Get(EventRegistryParams.LootId),
                     EnvironmentConditionsParams,
                     UniqueEnemiesParams,
                     DropRateParams,
                     DropChanceProvideWaysParams,
-                    DropChanceParams
+                    DropChanceParams,
+                    ExceptionsParams
                 )
             );
 
             EventBus.RegisterEvent(
                 OutwardLootManager.EVENT_BUS_ALL_GUID,
                 EventBusSubscriber.Event_AddLootByEnemyId,
+                "Add loot rule for specific enemy id. If enemy id validates it will not check other requirements!",
                 EventRegistryParamsHelper.Combine(
                     EventRegistryParamsHelper.Get(EventRegistryParams.LootId),
                     EventRegistryParamsHelper.Get(EventRegistryParams.EnemyId),
@@ -108,24 +121,33 @@ namespace OutwardLootManager.Events
             EventBus.RegisterEvent(
                 OutwardLootManager.EVENT_BUS_ALL_GUID,
                 EventBusSubscriber.Event_AddLootByEnemyName,
+                $"Add loot rule for specific enemy name. Simple way to add loot rule for specific characters. If using for bosses or unique enemies make sure to attach atleast one of the variables: " +
+                $"{EventRegistryParamsHelper.Get(EventRegistryParams.IsForUniqueEnemies).key}/" +
+                $"{EventRegistryParamsHelper.Get(EventRegistryParams.IsForBosses).key}/" +
+                $"{EventRegistryParamsHelper.Get(EventRegistryParams.IsForStoryBosses).key}/" +
+                $"{EventRegistryParamsHelper.Get(EventRegistryParams.IsForUniqueArenaBosses).key}/" +
+                $"{EventRegistryParamsHelper.Get(EventRegistryParams.IsForBossesPawns).key} otherwise it will not be applied.",
                 EventRegistryParamsHelper.Combine(
                     EventRegistryParamsHelper.Get(EventRegistryParams.LootId),
                     EventRegistryParamsHelper.Get(EventRegistryParams.EnemyName),
                     DropRateParams,
                     DropChanceProvideWaysParams,
-                    DropChanceParams
+                    DropChanceParams,
+                    EventRegistryParamsHelper.Get(EventRegistryParams.ExceptIds)
                 )
             );
 
             EventBus.RegisterEvent(
                 OutwardLootManager.EVENT_BUS_ALL_GUID,
                 EventBusSubscriber.Event_AddLootForUniques,
+                "Add loot rule for unique enemy groups." +
                 EventRegistryParamsHelper.Combine(
                     EventRegistryParamsHelper.Get(EventRegistryParams.LootId),
                     UniqueEnemiesParams,
                     DropRateParams,
                     DropChanceProvideWaysParams,
-                    DropChanceParams
+                    DropChanceParams,
+                    ExceptionsParams
                 )
             );
         }

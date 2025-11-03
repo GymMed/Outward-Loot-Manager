@@ -125,7 +125,9 @@ namespace OutwardLootManager
         {
             static void Prefix(LootableOnDeath __instance)
             {
-                LogMessage($"Hey brother! {__instance.Character.UID.Value} called me on death! {__instance.Character.Name}");
+#if DEBUG
+                LogMessage($"{__instance.Character.UID.Value} called me on death! {__instance.Character.Name}");
+#endif
                 OutwardLootManager.AddNewItemDrops(__instance);
             }
         }
@@ -139,19 +141,8 @@ namespace OutwardLootManager
                 // provide class and method separated by @ for easier live debugging
                 LogSL("ResourcesPrefabManager@Load called!");
 #endif
-                SceneLoopActionHelpers.StartSceneTesting();
-
                 LootRulesSerializer.Instance.LoadPlayerCustomLoots();
-
-                //LocalizationHelpers.LogConstructedAreasForEnum(UniqueArenaBossesHelper.WikiLocations);
-                //LocalizationHelpers.LogConstructedAreasForEnum(StoryBossesHelper.WikiLocations);
-                //LocalizationHelpers.LogConstructedAreasForEnum(BossPawnsHelper.WikiLocations);
-
-                //foreach(KeyValuePair<string, string> kvp in LocalizationManager.Instance.m_generalLocalization)
-                //{
-                //    LogMessage($"key: {kvp.Key} value: {kvp.Value}");
-                //}
-                //LogMessage(LocalizationHelpers.GetAllLocalizationsForUniques());
+                //SceneLoopActionHelpers.StartSceneTesting();
             }
         }
     }

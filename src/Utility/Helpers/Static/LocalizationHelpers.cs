@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.Analytics;
+using OutwardLootManager.Utility.Extensions;
+using uNature.Wrappers.Linq;
 
 namespace OutwardLootManager.Utility.Helpers.Static
 {
@@ -61,10 +63,10 @@ namespace OutwardLootManager.Utility.Helpers.Static
         {
             string output = "";
 
-            output += GetSeparationForTypeAndLocalization<UniqueEnemies>(UniqueEnemiesHelper.Names);
-            output += GetSeparationForTypeAndLocalization<UniqueArenaBosses>(UniqueArenaBossesHelper.Names);
-            output += GetSeparationForTypeAndLocalization<BossPawns>(BossPawnsHelper.Names);
-            output += GetSeparationForTypeAndLocalization<StoryBosseses>(StoryBossesHelper.Names);
+            output += GetSeparationForTypeAndLocalization<UniqueEnemies>(UniqueEnemiesHelper.Enemies.GetFirstDisplayNameFromGroup());
+            output += GetSeparationForTypeAndLocalization<UniqueArenaBosses>(UniqueArenaBossesHelper.Enemies.GetFirstDisplayNameFromGroup());
+            output += GetSeparationForTypeAndLocalization<BossPawns>(BossPawnsHelper.Enemies.GetFirstDisplayNameFromGroup());
+            output += GetSeparationForTypeAndLocalization<StoryBosseses>(StoryBossesHelper.Enemies.GetFirstDisplayNameFromGroup());
 
             return output;
         }

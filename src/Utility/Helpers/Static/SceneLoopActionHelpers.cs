@@ -2,6 +2,7 @@
 using NodeCanvas.Tasks.Actions;
 using OutwardLootManager.Events;
 using OutwardLootManager.Utility.Enums;
+using OutwardLootManager.Utility.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +18,12 @@ namespace OutwardLootManager.Utility.Helpers.Static
 
         public static void FinishedAction()
         {
-            OutwardLootManager.LogMessage($"Total characters found in scene: {allScenesCharacters.Count}");
+            OutwardLootManager.LogMessage($"Total characters found in scenes: {allScenesCharacters.Count}");
 
-            TryLoggingCharacterForEnum(UniqueEnemiesHelper.NamesLoc, UniqueEnemiesHelper.WikiLocations, UniqueEnemiesHelper.GameLocations);
-            TryLoggingCharacterForEnum(UniqueArenaBossesHelper.NamesLoc, UniqueArenaBossesHelper.WikiLocations, UniqueArenaBossesHelper.GameLocations);
-            TryLoggingCharacterForEnum(StoryBossesHelper.NamesLoc, StoryBossesHelper.WikiLocations, StoryBossesHelper.GameLocations);
-            TryLoggingCharacterForEnum(BossPawnsHelper.NamesLoc, BossPawnsHelper.WikiLocations, BossPawnsHelper.GameLocations);
+            TryLoggingCharacterForEnum(UniqueEnemiesHelper.Enemies.GetFirstNameLocFromGroup(), UniqueEnemiesHelper.Enemies.GetFirstWikiLocationsFromGroup(), UniqueEnemiesHelper.Enemies.GetFirstGameLocationsFromGroup());
+            TryLoggingCharacterForEnum(UniqueArenaBossesHelper.Enemies.GetFirstNameLocFromGroup(), UniqueArenaBossesHelper.Enemies.GetFirstWikiLocationsFromGroup(), UniqueArenaBossesHelper.Enemies.GetFirstGameLocationsFromGroup());
+            TryLoggingCharacterForEnum(StoryBossesHelper.Enemies.GetFirstNameLocFromGroup(), StoryBossesHelper.Enemies.GetFirstWikiLocationsFromGroup(), StoryBossesHelper.Enemies.GetFirstGameLocationsFromGroup());
+            TryLoggingCharacterForEnum(BossPawnsHelper.Enemies.GetFirstNameLocFromGroup(), BossPawnsHelper.Enemies.GetFirstWikiLocationsFromGroup(), BossPawnsHelper.Enemies.GetFirstGameLocationsFromGroup());
         }
 
         public static void TryLoggingCharacterForEnum<T>(Dictionary<T, string> names, Dictionary<T, string> wikiLocations, Dictionary<T, string> gameLocations)where T : Enum
@@ -60,10 +61,10 @@ namespace OutwardLootManager.Utility.Helpers.Static
             EventBusSubscriber.AddSceneTesterSubscribers();
 
             // Locations and enums built from wiki.
-            HashSet<AreaManager.AreaEnum> uniqueEnemiesAreas = AreaHelpers.GetUniqueAreasFromEnumDictionary(UniqueEnemiesHelper.GameLocations);
-            HashSet<AreaManager.AreaEnum> uniqueArenaBossesAreas = AreaHelpers.GetUniqueAreasFromEnumDictionary(UniqueArenaBossesHelper.GameLocations);
-            HashSet<AreaManager.AreaEnum> storyBossesAreas = AreaHelpers.GetUniqueAreasFromEnumDictionary(StoryBossesHelper.GameLocations);
-            HashSet<AreaManager.AreaEnum> bossPawnsAreas = AreaHelpers.GetUniqueAreasFromEnumDictionary(BossPawnsHelper.GameLocations);
+            HashSet<AreaManager.AreaEnum> uniqueEnemiesAreas = AreaHelpers.GetUniqueAreasFromEnumDictionary(UniqueEnemiesHelper.Enemies.GetFirstGameLocationsFromGroup());
+            HashSet<AreaManager.AreaEnum> uniqueArenaBossesAreas = AreaHelpers.GetUniqueAreasFromEnumDictionary(UniqueArenaBossesHelper.Enemies.GetFirstGameLocationsFromGroup());
+            HashSet<AreaManager.AreaEnum> storyBossesAreas = AreaHelpers.GetUniqueAreasFromEnumDictionary(StoryBossesHelper.Enemies.GetFirstGameLocationsFromGroup());
+            HashSet<AreaManager.AreaEnum> bossPawnsAreas = AreaHelpers.GetUniqueAreasFromEnumDictionary(BossPawnsHelper.Enemies.GetFirstGameLocationsFromGroup());
 
             HashSet<AreaManager.AreaEnum> unknownArenas = UnknownArenasHelper.GetAllAreaEnums().ToHashSet();
 
