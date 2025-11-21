@@ -321,7 +321,7 @@ YourMethod
 public static void YourMethod(EventPayload payload)
 {
     if (payload == null) return;
-    int lootRuleId = payload.Get&lt;int&gt;("lootRuleId", null);
+    int lootRuleId = payload.Get&lt;string&gt;("lootRuleId", null);
     // You would compare it with your registered loot rule id that you can provide
     // Your code...
 }</code></pre>
@@ -350,7 +350,7 @@ YourMethod
 public static void YourMethod(EventPayload payload)
 {
     if (payload == null) return;
-    int lootRuleId = payload.Get&lt;int&gt;("lootRuleId", null);
+    int lootRuleId = payload.Get&lt;string&gt;("lootRuleId", null);
     // You would compare it with your registered loot rule id that you can provide
     // Your code...
 }</code></pre>
