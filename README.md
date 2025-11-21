@@ -327,8 +327,6 @@ public static void YourMethod(EventPayload payload)
 </details>
 </details>
 
-</details>
-
 <details>
     <summary>Remove Loot Rule</summary>
 Event Name: <code>LootRuleRegistryManager@RemoveLootRule</code><br>
@@ -356,6 +354,8 @@ public static void YourMethod(EventPayload payload)
     // Your code...
 }</code></pre>
 </details>
+</details>
+
 </details>
 
 <details>
