@@ -103,7 +103,7 @@ int myItemId = 4000360; // Dreamers root
 var payload = new EventPayload
 {
     ["itemId"] = myItemId,
-    ["enemyName"] = "Hyena",
+    ["enemyName"] = "Hyena", //Character.Name
 };
 EventBus.Publish("gymmed.loot_manager_*", "AddLoot", payload);</code></pre>
 </details>
@@ -180,6 +180,7 @@ EventBus.Publish("gymmed.loot_manager_*", "AddLoot", payload);</code></pre>
 <details>
     <summary>Add Loot By Enemy Name</summary>
 Event Name: <code>AddLootByEnemyName</code><br>
+Compares Character.Name to your provided string and if they match provides loot<br>
 Required one of the item/itemDropChance/ListItemDropChance information.<br>
 Required enemyName.<br>
 
@@ -195,7 +196,7 @@ myItem.DropChance = 30;
 var payload = new EventPayload
 {
     ["itemDropChance"] = myItem,
-    ["enemyName"] = "Hyena",
+    ["enemyName"] = "Hyena", //Character.Name
     ["listExceptIds"] = new List&lt;string&gt;() { "yourEnemyId" },
 };
 EventBus.Publish("gymmed.loot_manager_*", "AddLootByEnemyName", payload);</code></pre>
