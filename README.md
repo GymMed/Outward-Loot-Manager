@@ -238,7 +238,7 @@ Event Name: <code>AddLootForUniques</code><br>
 Required one of the item/itemDropChance/ListItemDropChance information.<br>
 Required one of the <code>isForBosses</code>/<code>isForBossPawns</code>/
 <code>isForStoryBosses</code>/<code>isForUniqueArenaBosses</code>/
-<code>isForUniqueArenaBosses</code> parameters.
+<code>isForUniqueEnemies</code> parameters.
 
 <details>
     <summary>Example</summary>
