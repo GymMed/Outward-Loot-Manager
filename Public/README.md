@@ -376,25 +376,25 @@ All enemies included in <code>isForStoryBosses</code>. They are all compared by 
 <table>
     <thead>
         <tr>
-            <th>
+            <th align="center">
                 Picture
             </th>
-            <th>
+            <th align="center">
                 Character.Name
             </th>
-            <th>
+            <th align="center">
                 Character.m_name
             </th>
-            <th>
+            <th align="center">
                 Character.m_nameLoc
             </th>
-            <th>
+            <th align="center">
                 Character.UID
             </th>
-            <th>
+            <th align="center">
                 Wiki location
             </th>
-            <th>
+            <th align="center">
                 Game location
             </th>
         </tr>
@@ -570,28 +570,28 @@ All enemies included in <code>isForBossPawns</code>. They are all compared by id
 <table>
     <thead>
         <tr>
-            <th>
+            <th align="center">
                 Picture
             </th>
-            <th>
+            <th align="center">
                 Character.Name
             </th>
-            <th>
+            <th align="center">
                 Character.m_name
             </th>
-            <th>
+            <th align="center">
                 Character.m_nameLoc
             </th>
-            <th>
+            <th align="center">
                 Character.UID
             </th>
-            <th>
+            <th align="center">
                 Wiki location
             </th>
-            <th>
+            <th align="center">
                 Game location
             </th>
-            <th>
+            <th align="center">
                 Scene name
             </th>
         </tr>
@@ -720,28 +720,28 @@ All enemies included in <code>isForUniqueArenaBosses</code>. They are all compar
 <table>
     <thead>
         <tr>
-            <th>
+            <th align="center">
                 Picture
             </th>
-            <th>
+            <th align="center">
                 Character.Name
             </th>
-            <th>
+            <th align="center">
                 Character.m_name
             </th>
-            <th>
+            <th align="center">
                 Character.m_nameLoc
             </th>
-            <th>
+            <th align="center">
                 Character.UID
             </th>
-            <th>
+            <th align="center">
                 Wiki location
             </th>
-            <th>
+            <th align="center">
                 Game location
             </th>
-            <th>
+            <th align="center">
                 Scene name
             </th>
         </tr>
@@ -1631,25 +1631,25 @@ All enemies included in <code>isForUniqueEnemies</code>. They are all compared b
 <table>
     <thead>
         <tr>
-            <th>
+            <th align="center">
                 Picture
             </th>
-            <th>
+            <th align="center">
                 Character.Name
             </th>
-            <th>
+            <th align="center">
                 Character.m_name
             </th>
-            <th>
+            <th align="center">
                 Character.m_nameLoc
             </th>
-            <th>
+            <th align="center">
                 Character.UID
             </th>
-            <th>
+            <th align="center">
                 Wiki location
             </th>
-            <th>
+            <th align="center">
                 Game location
             </th>
         </tr>
@@ -2898,7 +2898,7 @@ All enemies included in <code>isForUniqueEnemies</code>. They are all compared b
 <table>
     <thead>
         <tr>
-            <th colspan="2">Required atleast one of type</th> <th>Parameter</th> <th>Type</th> <th>Description</th>
+            <th colspan="2" align="center">Required atleast one of type</th> <th align="center">Parameter</th> <th align="center">Type</th> <th align="center">Description</th>
         </tr>
     </thead>
     <tbody>
@@ -2981,12 +2981,12 @@ All enemies included in <code>isForUniqueEnemies</code>. They are all compared b
 <table>
     <thead>
         <tr>
-            <th colspan="3">
+            <th colspan="3" align="center">
                 Parameters used for rules control
             </th>
         </tr>
         <tr>
-            <th>Parameter</th> <th>Type</th> <th>Description</th>
+            <th align="center">Parameter</th> <th align="center">Type</th> <th align="center">Description</th>
         </tr>
     </thead>
     <tbody>
