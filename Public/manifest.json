@@ -4,7 +4,7 @@
 	"website_url": "https://github.com/GymMed/Outward-Loot-Manager",
 	"description": "Adds loot library for mod creators. This tool allows user to assign loots to enemies using Mods Communicator.",
 	"dependencies": [
-		"GymMed-OutwardModsCommunicator-1.2.0",
+		"GymMed-Mods_Communicator-1.2.0",
 		"sinai-dev-SideLoader-3.8.4",
 		"BepInEx-BepInExPack_Outward-5.4.19"
 	]
