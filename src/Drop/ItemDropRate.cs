@@ -15,6 +15,7 @@ namespace OutwardLootManager.Drop
         int maxDiceValue = 1;
         int minNumberOfDrops = 1;
         int maxNumberOfDrops = 1;
+        bool calculateChangeRequired = true;
 
         public ItemDropRate(ItemDropChance itemDropChance)
         {
@@ -33,10 +34,11 @@ namespace OutwardLootManager.Drop
 
         public ItemDropRate(int itemId, int dropChance = 10, 
             int minDropCount = 1, int maxDropCount = 1, int minDiceRollValue = 0, int maxDiceRollValue = 0,
-            int emptyDropChance = 0, int maxDiceValue = 1)
+            int emptyDropChance = 0, int maxDiceValue = 1, bool calculateChangeRequired = true)
         {
             this.EmptyDropChance = emptyDropChance;
             this.MaxDiceValue = maxDiceValue;
+            this.CalculateChangeRequired = calculateChangeRequired;
 
             this.AddItemDrop(itemId, dropChance, minDropCount, maxDropCount, minDiceRollValue, maxDiceRollValue);
         }
@@ -46,6 +48,7 @@ namespace OutwardLootManager.Drop
         public int MaxDiceValue { get => maxDiceValue; set => maxDiceValue = value; }
         public int MinNumberOfDrops { get => minNumberOfDrops; set => minNumberOfDrops = value; }
         public int MaxNumberOfDrops { get => maxNumberOfDrops; set => maxNumberOfDrops = value; }
+        public bool CalculateChangeRequired { get => calculateChangeRequired; set => calculateChangeRequired = value; }
 
         public void AddItemDrop(ItemDropChance itemDropChance)
         {

@@ -1,377 +1,151 @@
-<h1 align="center">
-    Outward Loot Manager
-</h1>
-<br/>
-<div align="center">
-  <img src="https://raw.githubusercontent.com/GymMed/Outward-Loot-Manager/refs/heads/main/preview/images/Logo.png" alt="Logo"/>
-</div>
+<table>
+    <thead>
+        <tr>
+            <th>
+                Picture
+            </th>
+            <th>
+                Character.Name
+            </th>
+            <th>
+                Character.m_name
+            </th>
+            <th>
+                Character.m_nameLoc
+            </th>
+            <th>
+                Character.UID
+            </th>
+            <th>
+                Wiki location
+            </th>
+            <th>
+                Game location
+            </th>
+            <th>
+                Scene name
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <a href="https://outward.fandom.com/wiki/Elite_Krypteia_Warrior">
+                    <img
+                    src="https://static.wikia.nocookie.net/outward_gamepedia/images/thumb/e/e3/Elite_Krypteia_Warrior.png/70px-Elite_Krypteia_Warrior.png"
+                    loading="lazy"
+                    decoding="async"
+                    width="70"
+                    height="92"
+                    alt="Elite Krypteia Warrior"
+                    />
+                </a>
+            </td>
+            <td>
+                Balira
+            </td>
+            <td>
+                KrypteiaGuard
+            </td>
+            <td>
+                name_unpc_balira_01
+            </td>
+            <td>
+                AbvgKMnPLUiffB6LzjaguQ
+            </td>
+            <td>
+                Tower of Regrets Arena
+            </td>
+            <td>
+                Unknown Arena
+            </td>
+            <td>
+                CalderaDungeonsBosses
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="https://outward.fandom.com/wiki/Elite_Krypteia_Witch">
+                    <img
+                    src="https://static.wikia.nocookie.net/outward_gamepedia/images/thumb/c/cd/Elite_Krypteia_Witch.png/70px-Elite_Krypteia_Witch.png"
+                    loading="lazy"
+                    decoding="async"
+                    width="70"
+                    height="72"
+                    alt="Elite Krypteia Witch"
+                    />
+                </a>
+            </td>
+            <td>
+                Balira
+            </td>
+            <td>
+                KrypteiaMage
+            </td>
+            <td>
+                name_unpc_balira_01
+            </td>
+            <td>
+                MfBjNPYsvkODdyLjYrlXXw
+            </td>
+            <td>
+                Tower of Regrets Arena
+            </td>
+            <td>
+                Unknown Arena
+            </td>
+            <td>
+                CalderaDungeonsBosses
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="2">
+                <a href="https://outward.fandom.com/wiki/Elite_Obsidian_Elemental">
+                    <img
+                    src="https://static.wikia.nocookie.net/outward_gamepedia/images/thumb/7/79/Elite_Obsidian_Elemental.png/70px-Elite_Obsidian_Elemental.png"
+                    loading="lazy"
+                    decoding="async"
+                    width="70"
+                    height="82"
+                    alt="Elite Obsidian Elemental"
+                    />
+                </a>
+            </td>
+            <td>
+                Obsidian Elemental
+            </td>
+            <td rowspan="2">
+                ObsidianElemental
+            </td>
+            <td rowspan="2">
+                Wildlife_ObsidianElemental
+            </td>
+            <td>
+                RM13rq4JTEqbuANnncMCKA
+            </td>
+            <td rowspan="2">
+                Burning Tree Arena
+            </td>
+            <td rowspan="2">
+                Unknown Arena
+            </td>
+            <td rowspan="2">
+                EmercarDungeonsBosses
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Obsidian Elemental (1)
+            </td>
+            <td>
+                Qrq3e4nUpkS8CH3yd8J-ow
+            </td>
+        </tr>
+    </tbody>
+</table>
 
-<div align="center">
-	<a href="https://thunderstore.io/c/outward/p/GymMed/Loot_Manager/">
-		<img src="https://img.shields.io/thunderstore/dt/GymMed/Loot_Manager" alt="Thunderstore Downloads">
-	</a>
-	<a href="https://github.com/GymMed/Outward-Loot-Manager/releases/latest">
-		<img src="https://img.shields.io/thunderstore/v/GymMed/Loot_Manager" alt="Thunderstore Version">
-	</a>
-	<a href="https://github.com/GymMed/Outward-Mods-Communicator/releases/latest">
-		<img src="https://img.shields.io/badge/Mods_Communicator-v1.2.0-D4BD00" alt="Mods Communicator Version">
-	</a>
-</div>
 
-Outward mod that allows you to assign loots to enemies using [Mods Communicator](https://github.com/GymMed/Outward-Mods-Communicator) to send events.
 
-<details>
-    <summary>Deeper Explanation</summary>
-This mod hooks into the <code>Lootable.OnDeath</code> method and evaluates the
-provided <code>LootRules</code>. These rules determine whether your custom loot
-should be applied to a dying enemy.
-
-The mod acts as a central <strong>Loot Manager</strong> that stores simple,
-abstracted logic and handles more complex game mechanics internally. Its state
-can be saved or loaded using XML.
-
-Other mods can inspect, modify, or react to the <code>LootManager</code>’s
-dynamic state and see how different mods interact with it.
-</details>
-
-## How to use it
-
-Firstly, install [Mods
-Communicator](https://github.com/GymMed/Outward-Mods-Communicator)
-After that, you can publish and subscribe to <code>LootManager</code> events.
-
-All events are registered and visible in Mods Communicator’s logging system.
-However, it is still recommended to read the event descriptions below and
-review the examples. Many event fields are optional and give you extra control,
-but they are not required.
-
-If the total drop chance of your items exceeds 100, the system automatically
-switches to weight-based loot instead of percentages. Providing
-<code>maxDiceValue</code> also forces weight mode.
-
-In weight mode, <code>LootManager</code> delegates all weight calculations to
-Outward's original system, which assigns <code>minDiceRollValue</code> and
-<code>maxDiceRollValue</code> to each item automatically.
-
-You can control drop behavior using <code>emptyDropChance</code> and
-<code>maxDiceValue</code>.
-
-### Events
-
-Check the parameter tables to understand which values are required. Event
-descriptions below are intentionally abstract — always refer to the tables for
-the exact field requirements.
-
-<details>
-    <summary>Publish</summary>
-Mod Namespace: <code>gymmed.loot_manager_*</code>
-Make sure to publish only after <code>LootManager</code> has initialized. I
-recommend adding it as a dependency in your mod, or publishing it before/after
-<code>ResourcesPrefabManager.Load</code> has finished.
-<details>
-    <summary>Add Loot</summary>
-Event Name: <code>AddLoot</code>
-Requires at least one of the following:
-
-<ul>
-<li>
-<code>item</code>
-</li>
-
-<li>
-<code>itemDropChance</code>
-</li>
-
-<li>
-<code>ListItemDropChance</code>
-</li>
-</ul>
-
-Also requires one or more of the filtering fields: enemy / faction / area / uniqueness.
-
-This event is the most flexible one — you can do everything with it.
-Other events exist only for convenience.
-
-<details>
-    <summary>Examples</summary>
-
-<details>
-    <summary>Guaranteed Loot</summary>
-<pre><code>using OutwardModsCommunicator;
-...
-int myItemId = 4000360; // Dreamers root
-var payload = new EventPayload
-{
-    ["itemId"] = myItemId,
-    ["enemyName"] = "Hyena",
-};
-EventBus.Publish("gymmed.loot_manager_*", "AddLoot", payload);</code></pre>
-</details>
-
-<details>
-    <summary>Chance Loot</summary>
-Providing enemy id ignores other enemy requirements.<br>
-This only works for enemy id, other requirements can be combined for
-flexibility. By providing <code>dropChance</code> to item it will internally
-make <code>emptyDropChance</code>
-<pre><code>using OutwardModsCommunicator;
-...
-int myItemId = 4000360; // Dreamers root
-string myEnemyId = "eCz766tEIEOWfK81om19wg"; // Calixa Boss
-var payload = new EventPayload
-{
-    ["itemId"] = myItemId,
-    ["dropChance"] = 50,
-    ["enemyId"] = myEnemyId,
-};
-EventBus.Publish("gymmed.loot_manager_*", "AddLoot", payload);</code></pre>
-</details>
-
-<details>
-    <summary>Faction Loot</summary>
-Additionally added how many items should be dropped(<code>LootManager</code>
-tries to build <code>ItemDropChance</code> internally). 
-<pre><code>using OutwardModsCommunicator;
-...
-int myItemId = 4000360; // Dreamers root
-var payload = new EventPayload
-{
-    ["itemId"] = myItemId,
-    ["minDropCount"] = 1,
-    ["maxDropCount"] = 3,
-    ["faction"] = Character.Factions.Bandits,
-};
-EventBus.Publish("gymmed.loot_manager_*", "AddLoot", payload);</code></pre>
-</details>
-
-<details>
-    <summary>Area Loot</summary>
-<pre><code>using OutwardModsCommunicator;
-...
-int myItemId = 4000360; // Dreamers root
-var payload = new EventPayload
-{
-    ["itemId"] = myItemId,
-    ["area"] = AreaManager.AreaEnum.Abrassar,
-};
-EventBus.Publish("gymmed.loot_manager_*", "AddLoot", payload);</code></pre>
-</details>
-
-<details>
-    <summary>Area Family Loot</summary>
-I recommend to make a helper method of finding your <code>AreaFamily</code> by enum/name.<br>
-You can find them in <code>AreaManager.AreaFamilies</code>.
-<pre><code>using OutwardModsCommunicator;
-...
-int myItemId = 4000360; // Dreamers root
-var payload = new EventPayload
-{
-    ["itemId"] = myItemId,
-    ["areaFamily"] = AreaManager.AreaFamilies[2], //Levant Region includes abrassar and all dungeons
-    // you can combine requirements
-    ["faction"] = Character.Factions.Bandits,
-    ["listExceptNames"] = new List&lt;string&gt;() { "Hyena" },
-};
-EventBus.Publish("gymmed.loot_manager_*", "AddLoot", payload);</code></pre>
-</details>
-</details>
-</details>
-
-<details>
-    <summary>Add Loot By Enemy Name</summary>
-Event Name: <code>AddLootByEnemyName</code><br>
-Required one of the item/itemDropChance/ListItemDropChance information.<br>
-Required enemyName.<br>
-
-Only <code>listExceptIds</code> work.
-
-<details>
-    <summary>Example</summary>
-<pre><code>using OutwardModsCommunicator;
-...
-ItemDropChance myItem = new ItemDropChance();
-myItem.ItemID = 4000360; // Dreamers root
-myItem.DropChance = 30;
-var payload = new EventPayload
-{
-    ["itemDropChance"] = myItem,
-    ["enemyName"] = "Hyena",
-    ["listExceptIds"] = new List&lt;string&gt;() { "yourEnemyId" },
-};
-EventBus.Publish("gymmed.loot_manager_*", "AddLootByEnemyName", payload);</code></pre>
-</details>
-</details>
-
-<details>
-    <summary>Add Loot By Enemy Id</summary>
-Event Name: <code>AddLootByEnemyId</code><br>
-Required one of the item/itemDropChance/ListItemDropChance information.<br>
-Required enemyId.
-
-<details>
-    <summary>Example</summary>
-<pre><code>using OutwardModsCommunicator;
-...
-List&lt;ItemDropChance&gt; drops = new();
-ItemDropChance myFirstItem = new ItemDropChance();
-myFirstItem.ItemID = 4000360; // Dreamers root
-myFirstItem.DropChance = 30;
-ItemDropChance mySecondItem = new ItemDropChance();
-mySecondItem.ItemID = 6000170; // Purifying quartz
-mySecondItem.DropChance = 30;
-drops.Add(myFirstItem);
-drops.Add(mySecondItem);
-var payload = new EventPayload
-{
-    ["listOfItemDropChances"] = drops,
-    ["enemyId"] = "JmeufMpL_E6eYnqCYP2r3w", // Elite Burning Man
-};
-EventBus.Publish("gymmed.loot_manager_*", "AddLootByEnemyId", payload);</code></pre>
-</details>
-</details>
-
-<details>
-    <summary>Add Loot For Uniques</summary>
-Makes bosses lootable.<br>
-Event Name: <code>AddLootForUniques</code><br>
-Required one of the item/itemDropChance/ListItemDropChance information.<br>
-Required one of the <code>isForBosses</code>/<code>isForBossPawns</code>/
-<code>isForStoryBosses</code>/<code>isForUniqueArenaBosses</code>/
-<code>isForUniqueArenaBosses</code> parameters.
-
-<details>
-    <summary>Example</summary>
-<pre><code>using OutwardModsCommunicator;
-...
-int myItemId = 4000360; // Dreamers root
-var payload = new EventPayload
-{
-    ["itemId"] = myItemId,
-    ["isForBosses"] = true, // is for all bosses
-};
-EventBus.Publish("gymmed.loot_manager_*", "AddLootForUniques", payload);</code></pre>
-</details>
-</details>
-
-<details>
-    <summary>Load Loots XML</summary>
-Loads your custom loot-rules XML document into the mod.<br>
-Event Name: <code>LootRulesSerializer@LoadCustomLoots</code><br> 
-Requires the full path to the XML file, provided as the <code>filePath</code> parameter.<br>
-
-<details>
-    <summary>Example</summary>
-<pre><code>using OutwardModsCommunicator;
-...
-var payload = new EventPayload
-{
-    ["filePath"] = "assemblyLocation/filePath.xml",
-};
-EventBus.Publish("gymmed.loot_manager", "LootRulesSerializer@SaveLootRulesToXml", payload);</code></pre>
-</details>
-</details>
-
-<details>
-    <summary>Store Loots to XML</summary>
-Stores the current <code>LootManager</code> loot rules into an XML document.<br>
-Event Name: <code>LootRulesSerializer@SaveLootRulesToXml</code><br> 
-Optional: you may provide a full XML file path using the <code>filePath</code>
-parameter. If omitted, the file will be stored at:
-<code>BepInEx/config/gymmed.Mods_Communicator/Loot_Manager/LootRules-date.xml</code>
-
-<details>
-    <summary>Example</summary>
-<pre><code>using OutwardModsCommunicator;
-...
-var payload = new EventPayload
-{
-    //["filePath"] = "",
-};
-EventBus.Publish("gymmed.loot_manager", "LootRulesSerializer@SaveLootRulesToXml", payload);</code></pre>
-</details>
-</details>
-
-</details>
-
-<details>
-    <summary>Subscribe</summary>
-Mod Namespace: <code>gymmed.loot_manager</code><br>
-You can listen then mod methods a triggered.
-
-<details>
-    <summary>Append Loot Rule</summary>
-Event Name: <code>LootRuleRegistryManager@AppendLootRule</code><br>
-On published and added loot rule gets triggered.
-
-<details>
-    <summary>Example</summary>
-<pre><code>using OutwardModsCommunicator;
-...
-public awake()
-{
-...
-EventBus.Subscribe(
-"gymmed.loot_manager",
-"LootRuleRegistryManager@AppendLootRule", 
-YourMethod
-);
-}
-...
-public static void YourMethod(EventPayload payload)
-{
-    if (payload == null) return;
-    int lootRuleId = payload.Get<int>("lootRuleId", null);
-    // You would compare it with your registered loot rule id that you can provide
-    // Your code...
-}</code></pre>
-</details>
-</details>
-
-</details>
-
-<details>
-    <summary>Remove Loot Rule</summary>
-Event Name: <code>LootRuleRegistryManager@RemoveLootRule</code><br>
-On published and removed loot rule gets triggered.
-
-<details>
-    <summary>Example</summary>
-<pre><code>using OutwardModsCommunicator;
-...
-public awake()
-{
-...
-EventBus.Subscribe(
-"gymmed.loot_manager",
-"LootRuleRegistryManager@RemoveLootRule", 
-YourMethod
-);
-}
-...
-public static void YourMethod(EventPayload payload)
-{
-    if (payload == null) return;
-    int lootRuleId = payload.Get<int>("lootRuleId", null);
-    // You would compare it with your registered loot rule id that you can provide
-    // Your code...
-}</code></pre>
-</details>
-</details>
-
-<details>
-    <summary>Unique Enemies</summary>
-If you going to provide only <code>enemyName</code> and that enemy is unique
-make sure to provide one of <code>isForBosses</code>,
-<code>isForBossPawns</code>, <code>isForStoryBosses</code>,
-<code>isForUniqueArenaBosses</code>, <code>isForUniqueEnemies</code> parameters.<br>
-Data collected using <a href="https://thunderstore.io/c/outward/p/GymMed/Scene_Tester/">Outward Scene Tester</a>
-
-<details>
-    <summary>Bosses</summary>
-Below are all included in <code>isForBosses</code> parameter.
-<details>
-    <summary>Story Bosses</summary>
-All enemies included in <code>isForStoryBosses</code>. They are all compared by id.
 <table>
     <thead>
         <tr>
@@ -561,161 +335,8 @@ All enemies included in <code>isForStoryBosses</code>. They are all compared by 
         </tr>
     </tbody>
 </table>
-</details>
 
-<details>
-    <summary>Boss Pawns</summary>
-All enemies included in <code>isForBossPawns</code>. They are all compared by id.
-<table>
-    <thead>
-        <tr>
-            <th>
-                Picture
-            </th>
-            <th>
-                Character.Name
-            </th>
-            <th>
-                Character.m_name
-            </th>
-            <th>
-                Character.m_nameLoc
-            </th>
-            <th>
-                Character.UID
-            </th>
-            <th>
-                Wiki location
-            </th>
-            <th>
-                Game location
-            </th>
-            <th>
-                Scene name
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <a href="https://outward.fandom.com/wiki/Elite_Krypteia_Warrior">
-                    <img
-                    src="https://static.wikia.nocookie.net/outward_gamepedia/images/thumb/e/e3/Elite_Krypteia_Warrior.png/70px-Elite_Krypteia_Warrior.png"
-                    loading="lazy"
-                    decoding="async"
-                    width="70"
-                    height="92"
-                    alt="Elite Krypteia Warrior"
-                    />
-                </a>
-            </td>
-            <td>
-                Balira
-            </td>
-            <td>
-                KrypteiaGuard
-            </td>
-            <td>
-                name_unpc_balira_01
-            </td>
-            <td>
-                AbvgKMnPLUiffB6LzjaguQ
-            </td>
-            <td>
-                Tower of Regrets Arena
-            </td>
-            <td>
-                Unknown Arena
-            </td>
-            <td>
-                CalderaDungeonsBosses
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href="https://outward.fandom.com/wiki/Elite_Krypteia_Witch">
-                    <img
-                    src="https://static.wikia.nocookie.net/outward_gamepedia/images/thumb/c/cd/Elite_Krypteia_Witch.png/70px-Elite_Krypteia_Witch.png"
-                    loading="lazy"
-                    decoding="async"
-                    width="70"
-                    height="72"
-                    alt="Elite Krypteia Witch"
-                    />
-                </a>
-            </td>
-            <td>
-                Balira
-            </td>
-            <td>
-                KrypteiaMage
-            </td>
-            <td>
-                name_unpc_balira_01
-            </td>
-            <td>
-                MfBjNPYsvkODdyLjYrlXXw
-            </td>
-            <td>
-                Tower of Regrets Arena
-            </td>
-            <td>
-                Unknown Arena
-            </td>
-            <td>
-                CalderaDungeonsBosses
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2">
-                <a href="https://outward.fandom.com/wiki/Elite_Obsidian_Elemental">
-                    <img
-                    src="https://static.wikia.nocookie.net/outward_gamepedia/images/thumb/7/79/Elite_Obsidian_Elemental.png/70px-Elite_Obsidian_Elemental.png"
-                    loading="lazy"
-                    decoding="async"
-                    width="70"
-                    height="82"
-                    alt="Elite Obsidian Elemental"
-                    />
-                </a>
-            </td>
-            <td>
-                Obsidian Elemental
-            </td>
-            <td rowspan="2">
-                ObsidianElemental
-            </td>
-            <td rowspan="2">
-                Wildlife_ObsidianElemental
-            </td>
-            <td>
-                RM13rq4JTEqbuANnncMCKA
-            </td>
-            <td rowspan="2">
-                Burning Tree Arena
-            </td>
-            <td rowspan="2">
-                Unknown Arena
-            </td>
-            <td rowspan="2">
-                EmercarDungeonsBosses
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Obsidian Elemental (1)
-            </td>
-            <td>
-                Qrq3e4nUpkS8CH3yd8J-ow
-            </td>
-        </tr>
-    </tbody>
-</table>
-</details>
 
-<details>
-    <summary>Unique Arena Bosses</summary>
-All enemies included in <code>isForUniqueArenaBosses</code>. They are all compared by id.
 <table>
     <thead>
         <tr>
@@ -1690,13 +1311,8 @@ All enemies included in <code>isForUniqueArenaBosses</code>. They are all compar
         </tr>
     </tbody>
 </table>
-</details>
 
-</details>
 
-<details>
-    <summary>Definitive Edition Unique Enemies</summary>
-All enemies included in <code>isForUniqueEnemies</code>. They are all compared by id.
 <table>
     <thead>
         <tr>
@@ -2437,7 +2053,7 @@ All enemies included in <code>isForUniqueEnemies</code>. They are all compared b
                     decoding="async"
                     width="70"
                     height="83"
-                    alt="Matriarch Myrmitaur"
+                    alt="Matriach Myrmitaur"
                     />
                 </a>
             </td>
@@ -2958,11 +2574,7 @@ All enemies included in <code>isForUniqueEnemies</code>. They are all compared b
         </tr>
     </tbody>
 </table>
-</details>
-</details>
 
-<details>
-    <summary>All Parameters</summary>
 
 <table>
     <thead>
@@ -2990,10 +2602,10 @@ All enemies included in <code>isForUniqueEnemies</code>. They are all compared b
             <td>maxDiceRollValue</td> <td>int</td> <td>Optional. Default is 0. Sets the highest dice roll value considered when calculating item drop chances. Use together with 'minDiceRollValue' and 'maxDiceValue'. You can provide ItemDropChance instead if you like.</td>
         </tr>
         <tr>
-            <td colspawn="2" rowspan="2" align="center">Choice to provide instead</td> <td>listOfItemDropChances</td> <td>List&lt;string&gt;</td> <td>Optional. Default null. Provide your created list of your ItemDropChance instances to be dropped.</td>
+            <td colspawn="2" rowspan="2" align="center">Choice to provide instead</td> <td>listOfItemDropChances</td> <td>bool</td> <td>Optional. Default null. Provide your created list of your ItemDropChance instances to be dropped.</td>
         </tr>
         <tr>
-            <td>itemDropChance</td> <td>ItemDropChance</td> <td>Optional. Default null. Provide your created ItemDropChance instance to be dropped.</td>
+            <td>itemDropChance</td> <td>bool</td> <td>Optional. Default null. Provide your created ItemDropChance instance to be dropped.</td>
         </tr>
         <tr>
             <td colspan="2" rowspan="10" align="center">Enemy</td> <td>enemyId</td> <td>string</td> <td>Default null. Determines if drop should be appliead for enemy. You can get this from UnityExplorer mod or logs.</td>
@@ -3026,7 +2638,7 @@ All enemies included in <code>isForUniqueEnemies</code>. They are all compared b
             <td>isForUniqueEnemies</td> <td>bool</td> <td>Optional. Default false. Should drop be applied for unique enemies?</td>
         </tr>
         <tr>
-            <td colspan="2" rowspan="6" align="center">Not Required</td> <td>lootId</td> <td>string</td> <td>Optional. You will need loot id if you planning to remove loot later.</td>
+            <td colspan="2" rowspan="6" align="center">Not Required</td> <td>lootId</td> <td>int</td> <td>Optional. You will need loot id if you planning to remove loot later.</td>
         </tr>
         <tr>
             <td>listExceptIds</td> <td>List&lt;string&gt;</td> <td>Optional. Default null. List of enemy ids that will not receive loot. You can get this from Character.UID.Value .</td>
@@ -3046,55 +2658,21 @@ All enemies included in <code>isForUniqueEnemies</code>. They are all compared b
     </tbody>
 </table>
 
-
 <table>
     <thead>
-        <tr>
-            <th colspan="3">
-                Parameters used for rules control
-            </th>
-        </tr>
         <tr>
             <th>Parameter</th> <th>Type</th> <th>Description</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>filePath</td> <td>string</td> <td>Required. Used for loading custom loots from xml file.</td>
+            <td>filePath</td> <td>int</td> <td>Required. Used for loading custom loots from xml file.</td>
         </tr>
         <tr>
-            <td>filePath</td> <td>string</td> <td>Required. Used for loading custom loots from xml file.</td>
+            <td>filePath</td> <td>int</td> <td>Required. Used for loading custom loots from xml file.</td>
         </tr>
         <tr>
-            <td>lootRuleId</td> <td>string</td> <td>Provides loot rule id.</td>
+            <td>lootRuleId</td> <td>int</td> <td>Provides loot rule id.</td>
         </tr>
     </tbody>
 </table>
-
-</details>
-
-<details>
-    <summary>Known Bugs</summary>
-<details>
-    <summary>Unique Enemies</summary>
-The unique arena boss <i>Grandmother</i> and its pawn enemies, the <i>Kryptia
-Warriors</i>, do not drop loot because they never trigger the
-<code>Lootable.OnDeath</code> event. Not a priority for me right now to fix it.
-</details>
-</details>
-
-## Can I find full project example how to use this?
-
-You can view [outward enchantments balancer pack here](https://github.com/GymMed/Outward-Enchantments-Balancer-Pack).
-
-## How to set up
-
-To manually set up, do the following
-
-1. Create the directory: `Outward\BepInEx\plugins\OutwardLootManager\`.
-2. Extract the archive into any directory(recommend empty).
-3. Move the contents of the plugins\ directory from the archive into the `BepInEx\plugins\OutwardLootManager\` directory you created.
-4. It should look like `Outward\BepInEx\plugins\OutwardSceneTester\OutwardLootManager.dll`
-   Launch the game.
-
-### If you liked the mod leave a star on [GitHub](https://github.com/GymMed/Outward-Loot-Manager) it's free

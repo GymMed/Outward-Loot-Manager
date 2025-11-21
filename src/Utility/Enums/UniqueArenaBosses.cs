@@ -54,7 +54,7 @@ namespace OutwardLootManager.Utility.Enums
             { UniqueArenaBosses.Elite_Ash_Giant, new(
                 new("Ash Giant", "EliteAshGiantPaf", "Giant_Guard", "3vXChaIK90qgq03PmsHFCg", "Unknown Arena", "Unknown Arena", "HallowedDungeonsBosses"),
                 new("Ash Giant", "EliteAshGiantPif", "Giant_Guard", "851czvFVDUaB42CgVzfKdg", "Unknown Arena", "Unknown Arena", "HallowedDungeonsBosses"),
-                new("Ash Giant", "EliteAshGiantPouf", "Giant_Guard", "kNmmOHZzKU-82F3OoX9NXw", "Unknown Arena", "Unknown Arena", "HallowedDungeonsBosses")
+                new("Ash Giant", "EliteAshGiantPouf", "Giant_Guard", "kNmmOHZzKU-82F3OoX9NXw", "Unknown Arena", "Unknown Arena", "HallowedDungeonsBosses")// strongest
                 )
             },
 
@@ -70,8 +70,8 @@ namespace OutwardLootManager.Utility.Enums
             },
 
             { UniqueArenaBosses.Elite_Crimson_Avatar, new("Burning Man", "CrimsonAvatarElite (1)", "Undead_BurningMan", "JmeufMpL_E6eYnqCYP2r3w", "Vault of Stone Arena", "Unknown Arena", "CalderaDungeonsBosses") },
-            { UniqueArenaBosses.Elite_Gargoyle_Alchemist, new("Shell Horror", "GargoyleBossMelee (1)", "Horror_Shell", "Z6yTTWK4u0GjDPfZ9X332A", "New Sirocco Arena", "Unknown Arena", "CalderaDungeonsBosses") },
-            { UniqueArenaBosses.Elite_Gargoyle_Mage, new("Shell Horror", "GargoyleBossMelee (1)", "Horror_Shell", "Z6yTTWK4u0GjDPfZ9X332A", "New Sirocco Arena", "Unknown Arena", "CalderaDungeonsBosses") },
+            { UniqueArenaBosses.Elite_Gargoyle_Alchemist, new("Shell Horror", "GargoyleBossMelee (1)", "Horror_Shell", "k75QmVu5t0e_zIjHnUFbIQ", "New Sirocco Arena", "Unknown Arena", "CalderaDungeonsBosses") },
+            { UniqueArenaBosses.Elite_Gargoyle_Mage, new("Shell Horror", "GargoyleBossMelee (1)", "Horror_Shell", "AKBYHSSMJUaH9ddLiz_SZA", "New Sirocco Arena", "Unknown Arena", "CalderaDungeonsBosses") },
             { UniqueArenaBosses.Elite_Gargoyle_Warrior, new("Shell Horror", "GargoyleBossMelee (1)", "Horror_Shell", "Z6yTTWK4u0GjDPfZ9X332A", "New Sirocco Arena", "Unknown Arena", "CalderaDungeonsBosses") },
             { UniqueArenaBosses.Elite_Mantis_Shrimp, new("Mantis Shrimp", "EliteMantisShrimp", "Wildlife_Shrimp", "RM13rq4JTEqbuANnncMCKA", "Voltaic Hatchery Arena", "Unknown Arena", "ChersoneseDungeonsBosses") },
             { UniqueArenaBosses.Elite_Sublime_Shell, new("Nicolas", "CageArmorBoss (1)", "Nicolas", "X-dfltOoGUm7YlCE_Li1zQ", "Isolated Windmill Arena", "Unknown Arena", "AntiqueFieldDungeonsBosses") },
@@ -81,7 +81,7 @@ namespace OutwardLootManager.Utility.Enums
             { UniqueArenaBosses.Immaculates_Bird, new("Immaculate", "EliteSupremeShell (1)", "Horror_Immaculate", "JsyOv_Cwu0K0HlXyZInRQQ", "Immaculate's Camp Arena", "Unknown Arena", "AntiqueFieldDungeonsBosses") },
             { UniqueArenaBosses.Light_Mender, new("Gold Lich", "LichGold (1)", "Undead_LichGold", "v9mN1u1uMkaxsncBXhIM9A", "Spire of Light", "Unknown Arena", "EmercarDungeonsBosses") },
             { UniqueArenaBosses.Plague_Doctor, new("Jade Lich", "LichJade (1)", "Undead_LichJade", "GfWl16_MZ0uS7UYIKpS5Lg", "Dark Ziggurat", "Unknown Arena", "EmercarDungeonsBosses") },
-            { UniqueArenaBosses.Troglodyte_Queen, new("Mana Troglodyte", "TroglodyteMana (1)", "Troglodyte_Mana", "6eGdsaRYfUy-9OlTVXR8rw", "Blister Burrow Arena", "Unknown Arena", "ChersoneseDungeonsBosses") },
+            { UniqueArenaBosses.Troglodyte_Queen, new("Mana Troglodyte", "TroglodyteMana (1)", "Troglodyte_Mana", "pcQlY_whLUCC-FZel18VMg", "Blister Burrow Arena", "Unknown Arena", "ChersoneseDungeonsBosses") },
         };
     }
 }

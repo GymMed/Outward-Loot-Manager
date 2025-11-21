@@ -3,6 +3,7 @@ using OutwardLootManager.Utility.Enums;
 using OutwardModsCommunicator.EventBus;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,6 +58,15 @@ namespace OutwardLootManager.Events
             };
 
             EventBus.Publish(Scene_Tester_Listener, Event_AddSceneLoopAction, payload);
+        }
+
+        public static void SendEnchantmentDescriptions()
+        {
+            var payload = new EventPayload
+            {
+                ["filePath"] = Path.Combine(LootRulesSerializer.Instance.configPath, "ModsCustomEnchantmentsDescriptions.xml"),
+            };
+            EventBus.Publish("gymmed.outward_enchantments_viewer_*", "LoadCustomEnchantmentsDescriptionsXml", payload);
         }
     }
 }

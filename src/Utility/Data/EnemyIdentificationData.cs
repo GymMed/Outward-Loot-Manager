@@ -33,7 +33,7 @@ namespace OutwardLootManager.Utility.Data
             if (comparers == null || comparers.Length == 0)
             {
                 return
-                    string.Equals(ID, character.UID.Value, StringComparison.OrdinalIgnoreCase);// ||
+                    string.Equals(ID, character.UID.Value, StringComparison.Ordinal);// ||
                     //string.Equals(DisplayName, character.Name, StringComparison.OrdinalIgnoreCase) ||
                     //string.Equals(InternalName, character.m_name, StringComparison.OrdinalIgnoreCase) ||
                     //string.Equals(LockKey, character.m_nameLocKey, StringComparison.OrdinalIgnoreCase);

@@ -5,7 +5,7 @@ setlocal enabledelayedexpansion
 set "sourceDll=C:\Users\pc\source\repos\OutwardLootManager\Release\OutwardLootManager.dll"
 
 :: Profiles array (quoted entries for readability)
-set profiles="Main" "Development"
+set profiles="Gytis" "Development"
 
 :: Base destination folder
 set "baseProfilePath=C:\Users\pc\AppData\Roaming\r2modmanPlus-local\OutwardDe\profiles"

@@ -109,7 +109,9 @@ namespace OutwardLootManager.Managers
                 OutwardLootManager.LogSL("LootManager@AddLootToLootableOnDeath Missing Item Container UID!");
                 return;
             }
-            string id = lootOnDeath.Character.UID + "_" + lootOnDeath.m_lootDroppers.Length.ToString() + "_" + lootOnDeath.m_lootDroppers[lootOnDeath.m_lootDroppers.Length - 1]?.m_mainDropTables?.Count.ToString();
+
+            lootOnDeath.m_lootable = true;
+            string id = GetLootId(lootOnDeath);
 
             GameObject dropObj = new GameObject("LootManager_" + id);
             dropObj.transform.SetParent(dropTablesTransform, false);
@@ -141,41 +143,149 @@ namespace OutwardLootManager.Managers
 
         public void AddLootToLootableOnDeath(LootableOnDeath lootOnDeath, ItemDropRate itemDropRate)
         {
-            Transform dropTablesTransform = GetOrCreatDropTableObject(lootOnDeath);
-
-            if(string.IsNullOrEmpty( lootOnDeath.Character?.UID.Value ) )
+            try 
             {
-                OutwardLootManager.LogSL("LootManager@AddLootToLootableOnDeath Missing Item Container UID!");
-                return;
+                if (lootOnDeath == null)
+                {
+                    OutwardLootManager.LogMessage("AddLootToLootableOnDeath: lootOnDeath is null!");
+                    return;
+                }
+
+                if (lootOnDeath.Character == null)
+                {
+                    OutwardLootManager.LogMessage("AddLootToLootableOnDeath: lootOnDeath.Character is null!");
+                    return;
+                }
+
+                if (lootOnDeath.Character.UID == null)
+                {
+                    OutwardLootManager.LogMessage("AddLootToLootableOnDeath: lootOnDeath.Character.UID is null!");
+                    return;
+                }
+
+                Transform dropTablesTransform = GetOrCreatDropTableObject(lootOnDeath);
+                lootOnDeath.m_lootable = true;
+
+                string id = GetLootId(lootOnDeath);
+                GameObject dropObj = new GameObject("LootManager_" + id);
+                dropObj.transform.SetParent(dropTablesTransform, false);
+
+                Dropable drop = dropObj.AddComponent<Dropable>();
+                drop.m_targetContainer = lootOnDeath.Character.Inventory.Pouch;
+                drop.m_uid = $"{lootOnDeath.Character.UID}_{(lootOnDeath.m_lootDroppers?.Length ?? 0)}";
+
+                if (string.IsNullOrEmpty(drop.m_uid))
+                {
+                    OutwardLootManager.LogMessage($"AddLootToLootableOnDeath: Invalid UID for {dropObj.name}");
+                    return;
+                }
+
+                List<Dropable> dropList = new List<Dropable>(lootOnDeath.m_lootDroppers ?? new Dropable[0]);
+                dropList.Add(drop);
+                lootOnDeath.m_lootDroppers = dropList.ToArray();
+
+                DropTable dropTable = dropObj.AddComponent<DropTable>();
+                dropTable.UID = id;
+
+                dropTable.MinNumberOfDrops = itemDropRate.MinNumberOfDrops;
+                dropTable.MaxNumberOfDrops = itemDropRate.MaxNumberOfDrops;
+                dropTable.m_itemDrops = itemDropRate.ListItemDropChance;
+                dropTable.m_emptyDropChance = itemDropRate.EmptyDropChance;
+                dropTable.m_dropAmount = new SimpleRandomChance();
+                dropTable.m_calculateChangeRequired = itemDropRate.CalculateChangeRequired;
+                dropTable.m_maxDiceValue = itemDropRate.MaxDiceValue;
+
+                //drop.m_mainDropTables.Add(dropTable);
+
+                drop.Start();
+                dropTable.Start();
+
+                TryMakeLootable(lootOnDeath.Character);
             }
-            string id = lootOnDeath.Character.UID + "_" + lootOnDeath.m_lootDroppers.Length.ToString() + "_" + lootOnDeath.m_lootDroppers[lootOnDeath.m_lootDroppers.Length - 1]?.m_mainDropTables?.Count.ToString();
+            catch(Exception ex)
+            {
+                OutwardLootManager.LogMessage($"LootManager@AddLootToLootableOnDeath We encountered a problem: \"{ex.Message}\"!");
+            }
+        }
 
-            GameObject dropObj = new GameObject("LootManager_" + id);
-            dropObj.transform.SetParent(dropTablesTransform, false);
+        // only for bosses to add interaction
+        public bool TryMakeLootable(Character character, bool _dropWeapons = false, bool _enablePouch = true, bool _forceIteractable = true, bool _loadedDead = false)
+        {
+            if(character?.Inventory?.m_inventoryPouch == null)
+            {
+                OutwardLootManager.LogMessage($"LootManager@TryMakeLootable can't make lootable! missing character?.Inventory?.m_invetoryPouch.");
+                return false;
+            }
 
-            Dropable drop = dropObj.AddComponent<Dropable>();
-            drop.m_targetContainer = lootOnDeath.Character.Inventory.Pouch;
-            drop.m_uid = lootOnDeath.Character.UID + "_" + lootOnDeath.m_lootDroppers.Length.ToString(); 
+            InteractionLoot lootInteraction = character.Inventory.m_inventoryPouch.transform.GetComponent<InteractionLoot>();
 
-            List<Dropable> dropList = new List<Dropable>(lootOnDeath.m_lootDroppers ?? new Dropable[0]);
-            dropList.Add(drop);
-            lootOnDeath.m_lootDroppers = dropList.ToArray();
+            // Only make lootable who isn't already
+            if(!lootInteraction)
+            {
+                character.Inventory.MakeLootable(_dropWeapons, _enablePouch, _forceIteractable, _loadedDead);
+            }
+            
+            return true;
+        }
 
-            DropTable dropTable = dropObj.AddComponent<DropTable>();
-            dropTable.UID = id;
+        public string GetLootId(LootableOnDeath lootOnDeath)
+        {
+            try {
+                if (lootOnDeath == null)
+                {
+                    OutwardLootManager.LogMessage("LootManager@GetLootId: lootOnDeath is null!");
+                    return "invalid_lootOnDeath";
+                }
 
-            dropTable.MinNumberOfDrops = itemDropRate.MinNumberOfDrops;
-            dropTable.MaxNumberOfDrops = itemDropRate.MaxNumberOfDrops;
-            dropTable.m_itemDrops = itemDropRate.ListItemDropChance;
-            dropTable.m_emptyDropChance = itemDropRate.EmptyDropChance;
-            dropTable.m_dropAmount = new SimpleRandomChance();
-            dropTable.m_calculateChangeRequired = false;
-            dropTable.m_maxDiceValue = itemDropRate.MaxDiceValue;
+                if (lootOnDeath.Character == null)
+                {
+                    OutwardLootManager.LogMessage("LootManager@GetLootId: lootOnDeath.Character is null!");
+                    return "invalid_character";
+                }
 
-            //drop.m_mainDropTables.Add(dropTable);
+                if (lootOnDeath.Character.UID == null)
+                {
+                    OutwardLootManager.LogMessage("LootManager@GetLootId: lootOnDeath.Character.UID is null!");
+                    return "invalid_UID";
+                }
 
-            drop.Start();
-            dropTable.Start();
+                int totalDroppers = lootOnDeath.m_lootDroppers?.Length ?? 0;
+                int currentLootDropper = totalDroppers < 1 ? 0 : totalDroppers - 1;
+                int dropTablesCount = 0;
+
+                if (lootOnDeath.m_lootDroppers != null && totalDroppers > 0)
+                {
+                    List<DropTable> dropTables = lootOnDeath.m_lootDroppers[currentLootDropper]?.m_mainDropTables;
+
+                    if(dropTables != null )
+                        dropTablesCount = dropTables.Count;
+                }
+
+                return $"{lootOnDeath.Character.UID}_{currentLootDropper.ToString()}_{dropTablesCount.ToString()}";
+            }
+            catch(Exception ex)
+            {
+                OutwardLootManager.LogMessage($"LootManager@GetLootId We encountered a problem: \"{ex.Message}\"!");
+                return "Error_" + lootOnDeath?.Character?.UID;
+            }
+        }
+
+        public bool HasDrops(LootableOnDeath lootOnDeath)
+        {
+            if (lootOnDeath == null)
+                return false;
+
+            Transform dropTablesTransform = lootOnDeath.transform.Find("DropTables");
+
+            if (dropTablesTransform == null)
+                return false;
+
+            Dropable drop = dropTablesTransform.GetComponentInChildren<Dropable>();
+
+            if (drop == null)
+                return false;
+
+            return true;
         }
 
         public Transform GetOrCreatDropTableObject(LootableOnDeath lootOnDeath)

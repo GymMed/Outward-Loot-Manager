@@ -26,6 +26,10 @@ namespace OutwardLootManager.Drop.Serialization
         [DefaultValue(1)]
         public int MaxDrops { get; set; } = 1;
 
+        [XmlAttribute("CalculateChangeRequired")]
+        [DefaultValue(true)]
+        public bool CalculateChangeRequired { get; set; } = true;
+
         [XmlArray("ItemDrops")]
         [XmlArrayItem("ItemDrop")]
         public List<ItemDropChanceSerializable> Drops { get; set; } = new();

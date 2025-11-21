@@ -57,32 +57,36 @@ namespace OutwardLootManager
             EventBusSubscriber.AddSubscribers();
         }
 
-        public static void AddNewItemDrops(LootableOnDeath lootableOnDeath)
+        public static void AddNewItemDrops(LootableOnDeath lootableOnDeath, bool _loadedDead)
         {
-            /*
-            ItemDropChance tsarDropChance = new ItemDropChance();
-            tsarDropChance.DropChance = 100;
-            tsarDropChance.ItemID = 6200010;
-            tsarDropChance.MinDropCount = 1;
-            tsarDropChance.MaxDropCount = 3;
-            tsarDropChance.ChanceReduction = 0;
-
-            ItemDropChance itemDropChance = new ItemDropChance();
-            itemDropChance.DropChance = 100;
-            itemDropChance.ItemID = 2000160;
-            itemDropChance.MinDropCount = 1;
-            itemDropChance.MaxDropCount = 2;
-            itemDropChance.ChanceReduction = 0;
-
-            List<ItemDropChance> itemDrops = new List<ItemDropChance>();
-            itemDrops.Add(tsarDropChance);
-            itemDrops.Add(itemDropChance);
-
-            LootManager.Instance.AddLootToLootableOnDeath(lootableOnDeath, itemDrops);
-            */
             try
             {
                 List<LootRule> lootRules = LootRuleRegistryManager.Instance.GetMatchingRules(lootableOnDeath.Character);
+
+                if (lootRules.Count < 1)
+                    return;
+
+                if(
+                    _loadedDead && 
+                    lootableOnDeath.m_lootDroppers != null &&
+                    BossRegistryManager.Instance.IsBoss(lootableOnDeath.Character) && 
+                    !LootManager.Instance.HasDrops(lootableOnDeath)
+                )
+                {
+                    if (lootableOnDeath.Character?.Inventory?.Pouch == null)
+                        return;
+
+                    ItemContainer pouch = lootableOnDeath.Character.Inventory.Pouch;
+
+                    // delete not our included items because some boss just carries epic gear that is later on either way given as a reward
+                    if (!pouch.IsEmpty)
+                        pouch.ClearPouch();
+
+                    foreach (Dropable drop in lootableOnDeath.m_lootDroppers)
+                    {
+                        drop.GenerateContents(lootableOnDeath.Character.Inventory.Pouch);
+                    }
+                }
 
                 foreach (LootRule lootRule in lootRules)
                 {
@@ -91,7 +95,7 @@ namespace OutwardLootManager
             }
             catch(Exception ex)
             {
-                LogMessage($"We encountered a problem: \"{ex.Message}\"!");
+                LogMessage($"LootManager@AddNewItemDrops We encountered a problem: \"{ex.Message}\"!");
             }
         }
 
@@ -123,12 +127,12 @@ namespace OutwardLootManager
         [HarmonyPatch(typeof(LootableOnDeath), nameof(LootableOnDeath.OnDeath))]
         public class LootableOnDeath_OnDeath
         {
-            static void Prefix(LootableOnDeath __instance)
+            static void Prefix(LootableOnDeath __instance, bool _loadedDead)
             {
 #if DEBUG
                 LogMessage($"{__instance.Character.UID.Value} called me on death! {__instance.Character.Name}");
 #endif
-                OutwardLootManager.AddNewItemDrops(__instance);
+                OutwardLootManager.AddNewItemDrops(__instance, _loadedDead);
             }
         }
 
@@ -142,6 +146,7 @@ namespace OutwardLootManager
                 LogSL("ResourcesPrefabManager@Load called!");
 #endif
                 LootRulesSerializer.Instance.LoadPlayerCustomLoots();
+                //EventBusPublisher.SendEnchantmentDescriptions();
                 //SceneLoopActionHelpers.StartSceneTesting();
             }
         }

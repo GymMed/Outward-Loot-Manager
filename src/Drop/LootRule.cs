@@ -93,6 +93,7 @@ namespace OutwardLootManager.Drop
             {
                 if (!BossRegistryManager.Instance.IsBoss(character))
                     return false;
+                return true;
             }
             else
             {

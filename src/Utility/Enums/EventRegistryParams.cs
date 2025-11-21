@@ -44,7 +44,7 @@ namespace OutwardLootManager.Utility.Enums
         private static readonly Dictionary<EventRegistryParams, (string key, Type type, string description)> _registry
             = new()
             {
-                [EventRegistryParams.LootId] = ("lootId", typeof(int), "Optional. You will need loot id if you planning to remove loot later."),
+                [EventRegistryParams.LootId] = ("lootId", typeof(string), "Optional. You will need loot id if you planning to remove loot later."),
                 [EventRegistryParams.ItemId] = ("itemId", typeof(int), "Required if itemDropChance/listOfItemDropChances is not provided. Loot item ID."),
                 [EventRegistryParams.DropChance] = ("dropChance", typeof(int), "Optional. Default is 10. Determines chance of dropping item. You can provide ItemDropChance instead if you like."),
                 [EventRegistryParams.MinDropCount] = ("minDropCount", typeof(int), "Optional. Default is 1. Provides minimum amount of items could be dropped. You can provide ItemDropChance instead if you like."),
@@ -63,17 +63,17 @@ namespace OutwardLootManager.Utility.Enums
                 [EventRegistryParams.IsForStoryBosses] = ("isForStoryBosses", typeof(bool), "Optional. Default false. Should drop be applied for story bosses?"),
                 [EventRegistryParams.IsForUniqueArenaBosses] = ("isForUniqueArenaBosses", typeof(bool), "Optional. Default false. Should drop be applied for unique arena bosses?"),
                 [EventRegistryParams.IsForUniqueEnemies] = ("isForUniqueEnemies", typeof(bool), "Optional. Default false. Should drop be applied for unique enemies?"),
-                [EventRegistryParams.ListOfItemDropChances] = ("listOfItemDropChances", typeof(bool), "Optional. Default null. Provide your created list of your ItemDropChance instances to be dropped."),
-                [EventRegistryParams.ItemDropChance] = ("itemDropChance", typeof(bool), "Optional. Default null. Provide your created ItemDropChance instance to be dropped."),
+                [EventRegistryParams.ListOfItemDropChances] = ("listOfItemDropChances", typeof(List<string>), "Optional. Default null. Provide your created list of your ItemDropChance instances to be dropped."),
+                [EventRegistryParams.ItemDropChance] = ("itemDropChance", typeof(ItemDropChance), "Optional. Default null. Provide your created ItemDropChance instance to be dropped."),
                 [EventRegistryParams.MinNumberOfDrops] = ("minNumberOfDrops", typeof(int), "Optional. Default is 1. Determines minimum amout of drops for same provided items(ItemDropChance)."),
                 [EventRegistryParams.MaxNumberOfDrops] = ("maxNumberOfDrops", typeof(int), "Optional. Default is 1. Determines maximum amout of drops for same provided items(ItemDropChance)."),
                 [EventRegistryParams.EmptyDropChance] = ("emptyDropChance", typeof(int), "Optional. Default is 0. Defines the percentage chance for a drop to be empty. Used together with 'maxDiceValue'."),
                 [EventRegistryParams.MaxDiceValue] = ("maxDiceValue", typeof(int), "Optional. Default 1. Is the limit of dice rolls on ItemDropChance. It determines which item should be added in drop."),
                 // not loot
-                [EventRegistryParams.LoadLootsXmlFilePath] = ("filePath", typeof(int), "Required. Used for loading custom loots from xml file."),
-                [EventRegistryParams.StoreLootsXmlFilePath] = ("filePath", typeof(int), "Optional. Default \"BepInEx/config/gymmed.Mods_Communicator/Loot_Manager\".Used for storing custom loots from xml file."),
+                [EventRegistryParams.LoadLootsXmlFilePath] = ("filePath", typeof(string), "Required. Used for loading custom loots from xml file."),
+                [EventRegistryParams.StoreLootsXmlFilePath] = ("filePath", typeof(string), "Optional. Default \"BepInEx/config/gymmed.Mods_Communicator/Loot_Manager\".Used for storing custom loots from xml file."),
                 // separated for publishers
-                [EventRegistryParams.LootRuleId] = ("lootRuleId", typeof(int), "Provides loot rule id.")
+                [EventRegistryParams.LootRuleId] = ("lootRuleId", typeof(string), "Provides loot rule id.")
             };
 
         public static (string key, Type type, string description) Get(EventRegistryParams param) => _registry[param];

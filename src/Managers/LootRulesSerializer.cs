@@ -148,6 +148,7 @@ namespace OutwardLootManager.Managers
                 itemDropRate.MaxDiceValue = loot.ItemDropRate.MaxDiceValue;
                 itemDropRate.MinNumberOfDrops = loot.ItemDropRate.MinDrops;
                 itemDropRate.MaxNumberOfDrops = loot.ItemDropRate.MaxDrops;
+                itemDropRate.CalculateChangeRequired = loot.ItemDropRate.CalculateChangeRequired;
 
                 LootRule lootRule = new LootRule(loot.Id, loot.EnemyID, loot.EnemyName, AreaFamiliesHelpers.GetAreaFamilyByName(loot.AreaFamilyName), itemDropRate);
 
@@ -185,7 +186,8 @@ namespace OutwardLootManager.Managers
                     EmptyDropChance = lootRule.itemDropRate.EmptyDropChance,
                     MaxDiceValue = lootRule.itemDropRate.MaxDiceValue,
                     MinDrops = lootRule.itemDropRate.MinNumberOfDrops,
-                    MaxDrops = lootRule.itemDropRate.MaxNumberOfDrops
+                    MaxDrops = lootRule.itemDropRate.MaxNumberOfDrops,
+                    CalculateChangeRequired = lootRule.itemDropRate.CalculateChangeRequired
                 };
 
                 foreach (ItemDropChance drop in lootRule.itemDropRate.ListItemDropChance)

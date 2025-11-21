@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace OutwardLootManager.Utility.Helpers.Static
 {
@@ -178,18 +179,111 @@ namespace OutwardLootManager.Utility.Helpers.Static
 
         public static void FillDropRate(ItemDropRate itemDropRate, EventPayload payload)
         {
+            int emptyDropChance = payload.Get<int>("emptyDropChance", -1);
 
-            int emptyDropChance = payload.Get<int>("emptyDropChance", 0);
-            itemDropRate.EmptyDropChance = emptyDropChance;
-
-            int maxDiceValue = payload.Get<int>("maxDiceValue", 1);
+            int maxDiceValue = payload.Get<int>("maxDiceValue", 0);
             itemDropRate.MaxDiceValue = maxDiceValue;
+
+            if(maxDiceValue < 1)
+            {
+                // this will force to recalculate maxDiceValue and item dice ranges on lootable.OnDeath event
+                // DropTable.GenerateDrop is the culprit and it is normal behaviour, good for simplicity
+                itemDropRate.CalculateChangeRequired = true;
+
+                // if publisher doesn't provide emptyDrop chance and maxDiceValue we try to get emptyDropChance by ourselves
+                // this allows us to only set drop chances for items and everything should be calculated by itself
+                if(emptyDropChance < 0)
+                {
+                    emptyDropChance = GetNormalizedEmptyDropChanceFromItems(payload);
+                }
+            }
+
+            if(emptyDropChance < 0)
+            {
+                emptyDropChance = 0;
+            }
+
+            itemDropRate.EmptyDropChance = emptyDropChance;
 
             int minNumberOfDrops = payload.Get<int>("minNumberOfDrops", 1);
             itemDropRate.MinNumberOfDrops = minNumberOfDrops;
 
             int maxNumberOfDrops = payload.Get<int>("maxNumberOfDrops", 1);
             itemDropRate.MaxNumberOfDrops = maxNumberOfDrops;
+        }
+
+        public static int GetNormalizedEmptyDropChanceFromItems(EventPayload payload)
+        {
+            // prio, publisher needs to provide one or another, not everything at once.
+            if (TryGetNormalizedEmptyDropChanceFromItemDropChances(payload, out int dropChanceFromItems))
+                return dropChanceFromItems;
+
+            if (TryGetNormalizedEmptyDropChanceFromItemDropChance(payload, out int dropChanceFromItem))
+                return dropChanceFromItem;
+
+            if (TryGetNormalizedEmptyDropChanceFromPayload(payload, out int dropChance))
+                return dropChance;
+
+            return 0;
+        }
+
+        public static bool TryGetNormalizedEmptyDropChanceFromPayload(EventPayload payload, out int value)
+        {
+            int dropChance = payload.Get<int>("dropChance", -1);
+
+            if(dropChance < 0 || dropChance > 100)
+            {
+                value = 0;
+                return false;
+            }
+
+            value = 100 - Mathf.Clamp(dropChance, 0, dropChance);
+            return true;
+        }
+
+        public static bool TryGetNormalizedEmptyDropChanceFromItemDropChance(EventPayload payload, out int value)
+        {
+            ItemDropChance itemDropChance = payload.Get<ItemDropChance>("itemDropChance", null);
+
+            if(itemDropChance == null)
+            {
+                value = 0;
+                return false;
+            }
+
+            if(itemDropChance.DropChance > 100)
+            {
+                value = 0;
+                return true;
+            }
+
+            value = 100 - Mathf.Clamp(itemDropChance.DropChance, 0, itemDropChance.DropChance);
+            return true;
+        }
+
+        public static bool TryGetNormalizedEmptyDropChanceFromItemDropChances(EventPayload payload, out int value)
+        {
+            List<ItemDropChance> dropChances = payload.Get<List<ItemDropChance>>("listOfItemDropChances", null);
+
+            if (dropChances == null)
+            {
+                value = -1;
+                return false;
+            }
+
+            int totalDropChances = 0;
+
+            foreach(ItemDropChance drop in dropChances)
+            {
+                totalDropChances += Mathf.Clamp(drop.DropChance, 0, drop.DropChance);
+            }
+
+            if (totalDropChances > 100)
+                value = 0;
+            else
+                value = 100 - totalDropChances;
+
+            return true;
         }
 
         public static ItemDropChance GetItemDropChanceFromPayLoad(EventPayload payload, int itemId = -1)
@@ -204,7 +298,9 @@ namespace OutwardLootManager.Utility.Helpers.Static
 
             itemDropChance.ItemID = itemId;
 
-            int dropChance = payload.Get<int>("dropChance", 10);
+            // made it 100 instead of 10 because later it will be normalized from weights to percentage
+            // with 10 it if emptyDropChance and maxDiceValue is not provided it will make emptyDropChance to 90
+            int dropChance = payload.Get<int>("dropChance", 100);
             itemDropChance.DropChance = dropChance;
 
             int minDropCount = payload.Get<int>("minDropCount", 1);
