@@ -2912,7 +2912,7 @@ All enemies included in <code>isForUniqueEnemies</code>. They are all compared b
             <td>minDropCount</td> <td>int</td> <td>Optional. Default is 1. Provides minimum amount of items could be dropped. You can provide ItemDropChance instead if you like.</td>
         </tr>
         <tr>
-            <td>dropChance</td> <td>int</td> <td>Optional. Default is 1. Provides maximum amount of items could be dropped. You can provide ItemDropChance instead if you like.</td>
+            <td>maxDropCount</td> <td>int</td> <td>Optional. Default is 1. Provides maximum amount of items could be dropped. You can provide ItemDropChance instead if you like.</td>
         </tr>
         <tr>
             <td>minDiceRollValue</td> <td>int</td> <td>Optional. Default is 0. Sets the lowest dice roll value at which item drop chances begin to count. Use together with 'maxDiceRollValue' and 'maxDiceValue'. You can provide ItemDropChance instead if you like.</td>
