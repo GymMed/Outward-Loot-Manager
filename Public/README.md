@@ -48,9 +48,9 @@ but they are not required.
 
 <details>
     <summary>Percentages vs Weights</summary>
-If the total drop chance of your items exceeds 100, the system automatically
+<br> If the total drop chance of your items exceeds 100, the system automatically
 switches to weight-based loot instead of percentages. Providing
-<code>maxDiceValue</code> also forces weight mode.
+<code>maxDiceValue</code> also forces weight mode.<br>
 
 In weight mode, Outward uses its original loot system, where each item is
 assigned a dice-roll range based on its <code>dropChance</code> and its position
