@@ -45,16 +45,31 @@ However, it is still recommended to read the event descriptions below and
 review the examples. Many event fields are optional and give you extra control,
 but they are not required.
 
+
+<details>
+    <summary>Percentages vs Weights</summary>
 If the total drop chance of your items exceeds 100, the system automatically
 switches to weight-based loot instead of percentages. Providing
 <code>maxDiceValue</code> also forces weight mode.
 
-In weight mode, <code>LootManager</code> delegates all weight calculations to
-Outward's original system, which assigns <code>minDiceRollValue</code> and
-<code>maxDiceRollValue</code> to each item automatically.
+In weight mode, Outward uses its original loot system, where each item is
+assigned a dice-roll range based on its <code>dropChance</code> and its position
+in the list. The system builds contiguous ranges as follows:
 
-You can control drop behavior using <code>emptyDropChance</code> and
+- <code>minDiceRollValue</code> is the sum of all previous items’ <code>dropChance</code>.
+- <code>maxDiceRollValue</code> is <code>minDiceRollValue + dropChance</code>.
+
+When the game rolls a number, the item whose range contains that number is the
+one that drops.
+
+**Example:** If each item has a <code>dropChance</code> of 10, the ranges will be
+0–10, 10–20, 20–30, etc.  
+The seventh item will therefore have
+<code>minDiceRollValue = 70</code> and <code>maxDiceRollValue = 80</code>.
+
+You can adjust the behavior further using <code>emptyDropChance</code> and
 <code>maxDiceValue</code>.
+</details>
 
 ### Events
 
@@ -372,7 +387,7 @@ Data collected using <a href="https://thunderstore.io/c/outward/p/GymMed/Scene_T
 Below are all included in <code>isForBosses</code> parameter.
 <details>
     <summary>Story Bosses</summary>
-All enemies included in <code>isForStoryBosses</code>. They are all compared by id.
+All enemies included in <code>isForStoryBosses</code>. They are all compared by UID. Djinn has dummy data and is not tested, but he never enters the state to be looted?
 <table>
     <thead>
         <tr>
@@ -566,7 +581,7 @@ All enemies included in <code>isForStoryBosses</code>. They are all compared by 
 
 <details>
     <summary>Boss Pawns</summary>
-All enemies included in <code>isForBossPawns</code>. They are all compared by id.
+All enemies included in <code>isForBossPawns</code>. They are all compared by UID.
 <table>
     <thead>
         <tr>
@@ -716,7 +731,7 @@ All enemies included in <code>isForBossPawns</code>. They are all compared by id
 
 <details>
     <summary>Unique Arena Bosses</summary>
-All enemies included in <code>isForUniqueArenaBosses</code>. They are all compared by id.
+All enemies included in <code>isForUniqueArenaBosses</code>. They are all compared by UID.
 <table>
     <thead>
         <tr>
@@ -1627,7 +1642,7 @@ All enemies included in <code>isForUniqueArenaBosses</code>. They are all compar
 
 <details>
     <summary>Definitive Edition Unique Enemies</summary>
-All enemies included in <code>isForUniqueEnemies</code>. They are all compared by id.
+All enemies included in <code>isForUniqueEnemies</code>. They are all compared by UID.
 <table>
     <thead>
         <tr>
