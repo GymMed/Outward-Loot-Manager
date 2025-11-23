@@ -3008,7 +3008,7 @@ All enemies included in <code>isForUniqueEnemies</code>. They are all compared b
     <summary>Known Bugs</summary>
 <details>
     <summary>Unique Enemies</summary>
-The unique arena boss <i>Grandmother</i> and its pawn enemies, the <i>Kryptia
+1.The unique arena boss <i>Grandmother</i> and its pawn enemies, the <i>Kryptia
 Warriors</i>, do not drop loot because they never trigger the
 <code>Lootable.OnDeath</code> event. Not a priority for me right now to fix it.
 </details>
