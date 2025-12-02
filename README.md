@@ -380,6 +380,9 @@ If you going to provide only <code>enemyName</code> and that enemy is unique
 make sure to provide one of <code>isForBosses</code>,
 <code>isForBossPawns</code>, <code>isForStoryBosses</code>,
 <code>isForUniqueArenaBosses</code>, <code>isForUniqueEnemies</code> parameters.<br>
+Enemies a compared by <code>UID + _ + Area.GetName().Trim().Replace(' ', '_')</code>
+because even UID repeat(is not truly unique) in different scenes and adding
+location prevents collision.<br>
 Data collected using <a href="https://thunderstore.io/c/outward/p/GymMed/Scene_Tester/">Outward Scene Tester</a>
 
 <details>

@@ -1,4 +1,5 @@
-﻿using OutwardLootManager.Utility.Data;
+﻿using OutwardLootManager.Managers;
+using OutwardLootManager.Utility.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,9 +43,14 @@ namespace OutwardLootManager.Utility.Extensions
             out TEnum boss)
             where TEnum : Enum
         {
+            string enumIdentificator = BossRegistryManager.GetEnemyBossIdentificator(character);
+
             foreach (var kvp in dict)
             {
-                if (kvp.Value.Matches(character))//, (IdData, passedChar) => passedChar.UID.Value == IdData.ID))
+                //, (IdData, passedChar) => passedChar.UID.Value == IdData.ID))
+                if (kvp.Value.Matches(character, 
+                    (idData, character) => enumIdentificator.Equals(BossRegistryManager.GetIdentificatorFromEnemyIdentification(idData)))
+                )
                 {
                     boss = kvp.Key;
                     return true;

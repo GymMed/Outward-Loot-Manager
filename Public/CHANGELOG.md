@@ -1,11 +1,22 @@
 ## Changelog
 
+### Release 0.0.4 Version
+
+#### Fixed
+
+-   Changed Unique enemies validation. Character.UID seems to be not unique
+    because most likely game developers copied prefabs instead of using code to
+    generate and assign it to enemies. Now to validate <code>isForBosses</code>,
+    <code>isForBossPawns</code>, <code>isForStoryBosses</code>,
+    <code>isForUniqueArenaBosses</code>, <code>isForUniqueEnemies</code> 
+    parameters mod uses
+    <code>UID + _ + Area.GetName().Trim().Replace(' ', '_')</code>
+
 ### Release 0.0.3 Version
 
 #### Fixed
 
 -   Changed readme descriptions. Parameters fixes.
-
 
 ### Release 0.0.2 Version
 

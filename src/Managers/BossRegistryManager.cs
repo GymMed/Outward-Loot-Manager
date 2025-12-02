@@ -50,8 +50,9 @@ namespace OutwardLootManager.Managers
                 // Register each enemy name from the group as a lookup key
                 foreach (var enemy in groupData.Enemies)
                 {
+
                     if (!string.IsNullOrWhiteSpace(enemy.ID))
-                        bossLookup[enemy.ID] = bossId;
+                        bossLookup[GetIdentificatorFromEnemyIdentification(enemy)] = bossId;
                     //if (!string.IsNullOrWhiteSpace(enemy.DisplayName))
                     //    bossLookup[enemy.DisplayName] = bossId;
 
@@ -68,11 +69,38 @@ namespace OutwardLootManager.Managers
             bossLookup.TryGetValue(key, out boss);
 
         public bool IsBoss(Character character) =>
-            bossLookup.ContainsKey(character.UID.Value);
+            bossLookup.ContainsKey(GetEnemyBossIdentificator(character));
 
         public bool IsBossOfCategory(string key, BossCategories category) =>
             TryGetBoss(key, out var boss) && boss.Category == category;
 
+        public bool IsBossOfCategory(Character character, BossCategories category)
+        {
+            return TryGetBoss(BossRegistryManager.GetEnemyBossIdentificator(character), out var boss) && boss.Category == category;
+        }
+
         public IEnumerable<BossID> GetBossesOfCategory(BossCategories category) =>
-            bossLookup.Values.Where(b => b.Category == category);    }
+            bossLookup.Values.Where(b => b.Category == category);
+
+        public static string GetEnemyBossIdentificator(Character character)
+        {
+            // it would be better to use scene names instead of area names that do collide with unknown arena's
+            string location = AreaManager.Instance.CurrentArea?.GetName();
+
+            if (string.IsNullOrEmpty(location))
+                return character.UID.Value;
+
+            return $"{character.UID.Value}_{FixAreaNameForCode(location)}";
+        }
+
+        public static string GetIdentificatorFromEnemyIdentification(EnemyIdentificationData enemy)
+        {
+            return $"{enemy.ID}_{FixAreaNameForCode(enemy.GameLocation)}";
+        }
+
+        public static string FixAreaNameForCode(string name)
+        {
+            return name.Trim().Replace(' ', '_');
+        }
+    }
 }

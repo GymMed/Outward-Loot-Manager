@@ -108,7 +108,7 @@ namespace OutwardLootManager.Drop
             }
             else
             {
-                if (BossRegistryManager.Instance.IsBossOfCategory(character.UID.Value, BossCategories.Arena))
+                if (BossRegistryManager.Instance.IsBossOfCategory(character, BossCategories.Arena))
                     return false;
             }
 
@@ -119,7 +119,7 @@ namespace OutwardLootManager.Drop
             }
             else
             {
-                if (BossRegistryManager.Instance.IsBossOfCategory(character.UID.Value, BossCategories.Story))
+                if (BossRegistryManager.Instance.IsBossOfCategory(character, BossCategories.Story))
                     return false;
             }
 
@@ -130,7 +130,7 @@ namespace OutwardLootManager.Drop
             }
             else
             {
-                if (BossRegistryManager.Instance.IsBossOfCategory(character.UID.Value, BossCategories.Pawn))
+                if (BossRegistryManager.Instance.IsBossOfCategory(character, BossCategories.Pawn))
                     return false;
             }
 
