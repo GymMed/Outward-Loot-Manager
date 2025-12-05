@@ -63,7 +63,7 @@ namespace OutwardLootManager.Utility.Enums
                 [EventRegistryParams.IsForStoryBosses] = ("isForStoryBosses", typeof(bool), "Optional. Default false. Should drop be applied for story bosses?"),
                 [EventRegistryParams.IsForUniqueArenaBosses] = ("isForUniqueArenaBosses", typeof(bool), "Optional. Default false. Should drop be applied for unique arena bosses?"),
                 [EventRegistryParams.IsForUniqueEnemies] = ("isForUniqueEnemies", typeof(bool), "Optional. Default false. Should drop be applied for unique enemies?"),
-                [EventRegistryParams.ListOfItemDropChances] = ("listOfItemDropChances", typeof(List<string>), "Optional. Default null. Provide your created list of your ItemDropChance instances to be dropped."),
+                [EventRegistryParams.ListOfItemDropChances] = ("listOfItemDropChances", typeof(List<ItemDropChance>), "Optional. Default null. Provide your created list of your ItemDropChance instances to be dropped."),
                 [EventRegistryParams.ItemDropChance] = ("itemDropChance", typeof(ItemDropChance), "Optional. Default null. Provide your created ItemDropChance instance to be dropped."),
                 [EventRegistryParams.MinNumberOfDrops] = ("minNumberOfDrops", typeof(int), "Optional. Default is 1. Determines minimum amout of drops for same provided items(ItemDropChance)."),
                 [EventRegistryParams.MaxNumberOfDrops] = ("maxNumberOfDrops", typeof(int), "Optional. Default is 1. Determines maximum amout of drops for same provided items(ItemDropChance)."),
