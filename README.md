@@ -65,7 +65,7 @@ one that drops.
 **Example:** If each item has a <code>dropChance</code> of 10, the ranges will be
 0–10, 10–20, 20–30, etc.  
 The seventh item will therefore have
-<code>minDiceRollValue = 70</code> and <code>maxDiceRollValue = 80</code>.
+<code>minDiceRollValue = 60</code> and <code>maxDiceRollValue = 70</code>.
 
 You can adjust the behavior further using <code>emptyDropChance</code> and
 <code>maxDiceValue</code>.
@@ -2939,7 +2939,7 @@ All enemies included in <code>isForUniqueEnemies</code>. They are all compared b
             <td>maxDiceRollValue</td> <td>int</td> <td>Optional. Default is 0. Sets the highest dice roll value considered when calculating item drop chances. Use together with 'minDiceRollValue' and 'maxDiceValue'. You can provide ItemDropChance instead if you like.</td>
         </tr>
         <tr>
-            <td colspawn="2" rowspan="2" align="center">Choice to provide instead</td> <td>listOfItemDropChances</td> <td>List&lt;string&gt;</td> <td>Optional. Default null. Provide your created list of your ItemDropChance instances to be dropped.</td>
+            <td colspawn="2" rowspan="2" align="center">Choice to provide instead</td> <td>listOfItemDropChances</td> <td>List&lt;ItemDropChance&gt;</td> <td>Optional. Default null. Provide your created list of your ItemDropChance instances to be dropped.</td>
         </tr>
         <tr>
             <td>itemDropChance</td> <td>ItemDropChance</td> <td>Optional. Default null. Provide your created ItemDropChance instance to be dropped.</td>

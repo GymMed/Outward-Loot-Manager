@@ -1,5 +1,13 @@
 ## Changelog
 
+### Release 0.0.5 Version
+
+#### Fixed
+
+-   Fixed <code>listOfItemDropChances</code> parameter description. Instead of
+    providing type <code>List&lt;string&gt;</code> now it is declared that
+    <code>List&lt;ItemDropChance&gt;</code> type should be used.
+
 ### Release 0.0.4 Version
 
 #### Fixed
