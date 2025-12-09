@@ -71,7 +71,7 @@ namespace OutwardLootManager.Utility.Enums
                 [EventRegistryParams.MaxDiceValue] = ("maxDiceValue", typeof(int), "Optional. Default 1. Is the limit of dice rolls range on DropTable."),
                 // not loot
                 [EventRegistryParams.LoadLootsXmlFilePath] = ("filePath", typeof(string), "Required. Used for loading custom loots from xml file."),
-                [EventRegistryParams.StoreLootsXmlFilePath] = ("filePath", typeof(string), "Optional. Default \"BepInEx/config/gymmed.Mods_Communicator/Loot_Manager\".Used for storing custom loots from xml file."),
+                [EventRegistryParams.StoreLootsXmlFilePath] = ("filePath", typeof(string), "Optional. Default \"BepInEx/config/gymmed.Mods_Communicator/Loot_Manager\".Used for storing custom loots to xml file."),
                 // separated for publishers
                 [EventRegistryParams.LootRuleId] = ("lootRuleId", typeof(string), "Provides loot rule id.")
             };

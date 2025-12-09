@@ -2975,7 +2975,7 @@ All enemies included in <code>isForUniqueEnemies</code>. They are all compared b
             <td>isForUniqueEnemies</td> <td>bool</td> <td>Optional. Default false. Should drop be applied for unique enemies?</td>
         </tr>
         <tr>
-            <td colspan="2" rowspan="6" align="center">Not Required</td> <td>lootId</td> <td>string</td> <td>Optional. You will need loot id if you planning to remove loot later.</td>
+            <td colspan="2" rowspan="7" align="center">Not Required</td> <td>lootId</td> <td>string</td> <td>Optional. You will need loot id if you planning to remove loot later.</td>
         </tr>
         <tr>
             <td>listExceptIds</td> <td>List&lt;string&gt;</td> <td>Optional. Default null. List of enemy ids that will not receive loot. You can get this from Character.UID.Value .</td>
@@ -3002,23 +3002,26 @@ All enemies included in <code>isForUniqueEnemies</code>. They are all compared b
 <table>
     <thead>
         <tr>
-            <th colspan="3" align="center">
+            <th colspan="4" align="center">
                 Parameters used for rules control
             </th>
         </tr>
         <tr>
-            <th align="center">Parameter</th> <th align="center">Type</th> <th align="center">Description</th>
+            <th align="center">Events</th> <th align="center">Parameter</th> <th align="center">Type</th> <th align="center">Description</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>filePath</td> <td>string</td> <td>Required. Used for loading custom loots from xml file.</td>
+            <td><code>LootRulesSerializer@LoadCustomLoots</code></td> <td>filePath</td> <td>string</td> <td>Required. Used for loading custom loots from xml file.</td>
         </tr>
         <tr>
-            <td>filePath</td> <td>string</td> <td>Required. Used for loading custom loots from xml file.</td>
+            <td><code>LootRulesSerializer@SaveLootRulesToXml</code></td> <td>filePath</td> <td>string</td> <td>Optional. Default <code>"BepInEx/config/gymmed.Mods_Communicator/Loot_Manager"</code>. Used for storing custom loots to xml file.</td>
         </tr>
         <tr>
-            <td>lootRuleId</td> <td>string</td> <td>Provides loot rule id.</td>
+            <td> 
+                <code>LootRuleRegistryManager@AppendLootRule</code>,  
+                <code>LootRuleRegistryManager@RemoveLootRule</code>
+            </td> <td>lootRuleId</td> <td>string</td> <td>Provides loot rule id.</td>
         </tr>
     </tbody>
 </table>
