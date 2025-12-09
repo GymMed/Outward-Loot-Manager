@@ -68,7 +68,7 @@ namespace OutwardLootManager.Utility.Enums
                 [EventRegistryParams.MinNumberOfDrops] = ("minNumberOfDrops", typeof(int), "Optional. Default is 1. Determines minimum amout of drops for same provided items(ItemDropChance)."),
                 [EventRegistryParams.MaxNumberOfDrops] = ("maxNumberOfDrops", typeof(int), "Optional. Default is 1. Determines maximum amout of drops for same provided items(ItemDropChance)."),
                 [EventRegistryParams.EmptyDropChance] = ("emptyDropChance", typeof(int), "Optional. Default is 0. Defines the percentage chance for a drop to be empty. Used together with 'maxDiceValue'."),
-                [EventRegistryParams.MaxDiceValue] = ("maxDiceValue", typeof(int), "Optional. Default 1. Is the limit of dice rolls on ItemDropChance. It determines which item should be added in drop."),
+                [EventRegistryParams.MaxDiceValue] = ("maxDiceValue", typeof(int), "Optional. Default 1. Is the limit of dice rolls range on DropTable."),
                 // not loot
                 [EventRegistryParams.LoadLootsXmlFilePath] = ("filePath", typeof(string), "Required. Used for loading custom loots from xml file."),
                 [EventRegistryParams.StoreLootsXmlFilePath] = ("filePath", typeof(string), "Optional. Default \"BepInEx/config/gymmed.Mods_Communicator/Loot_Manager\".Used for storing custom loots from xml file."),

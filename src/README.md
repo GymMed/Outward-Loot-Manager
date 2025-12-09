@@ -2992,6 +2992,9 @@ All enemies included in <code>isForUniqueEnemies</code>. They are all compared b
         <tr>
             <td>emptyDropChance</td> <td>int</td> <td>Optional. Default is 0. Defines the percentage chance for a drop to be empty. Used together with 'maxDiceValue'.</td>
         </tr>
+        <tr>
+            <td>maxDiceValue</td> <td>int</td> <td>Optional. Default 1. Is the limit of dice rolls range on DropTable.</td>
+        </tr>
     </tbody>
 </table>
 
