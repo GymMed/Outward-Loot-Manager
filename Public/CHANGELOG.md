@@ -1,5 +1,12 @@
 ## Changelog
 
+### Release 0.0.6 Version
+
+#### Fixed
+
+-   Fixed README document by adding <code>maxDiceValue</code> to parameters
+    table, added events column for rules control table, fixed load xml example.
+
 ### Release 0.0.5 Version
 
 #### Fixed

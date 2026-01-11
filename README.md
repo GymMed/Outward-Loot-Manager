@@ -283,7 +283,7 @@ var payload = new EventPayload
 {
     ["filePath"] = "assemblyLocation/filePath.xml",
 };
-EventBus.Publish("gymmed.loot_manager", "LootRulesSerializer@SaveLootRulesToXml", payload);</code></pre>
+EventBus.Publish("gymmed.loot_manager", "LootRulesSerializer@LoadCustomLoots", payload);</code></pre>
 </details>
 </details>
 
